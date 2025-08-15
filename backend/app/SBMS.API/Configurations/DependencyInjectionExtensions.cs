@@ -1,4 +1,7 @@
-﻿using Serilog;
+﻿using SBMS.Application.Services;
+using SBMS.Domain.Repositories;
+using SBMS.Infrastructure.Persistence.MySQL.Repositories;
+using Serilog;
 using System.Reflection;
 
 namespace SBMS.API.Configurations
@@ -20,6 +23,20 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.Load("SBMS.Infrastructure.Persistence.MySQL"));
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<ITestServices, TestServices>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<ITestRepository, TestRepository>();
 
             return services;
         }

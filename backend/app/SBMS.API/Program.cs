@@ -9,6 +9,8 @@ builder.Services.AddControllers();
 
 // Add Registers: services, repositories, dataBase
 builder.Services.LoggerConfigurations();
+builder.Services.RegistrerDataBase();
+builder.Services.RegisterAutoMapper();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

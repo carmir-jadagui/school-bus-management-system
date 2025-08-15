@@ -16,5 +16,12 @@ namespace SBMS.API.Configurations
 
             return services;
         }
+
+        public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.Load("SBMS.Infrastructure.Persistence.MySQL"));
+
+            return services;
+        }
     }
 }

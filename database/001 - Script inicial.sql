@@ -6,9 +6,10 @@ CREATE DATABASE IF NOT EXISTS sbms;
 USE sbms;
 
 -- Crea una tabla con registro de prueba, para validar la conexión entre las diferentes capastest
-CREATE TABLE `sbms`.`test` (
+CREATE TABLE IF NOT EXISTS `sbms`.`test` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Message` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Id`));
+  PRIMARY KEY (`Id`)
+);
 
 INSERT INTO `sbms`.`test` (`Message`) VALUES ('Hola mundo desde la BD');

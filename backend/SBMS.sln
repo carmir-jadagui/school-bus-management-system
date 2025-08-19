@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{6CAEEF0C-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{AB79DDBA-6B56-4E56-BB52-67EEE872979E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{28E5277F-BB2C-4ACB-A8AB-AE48D3EAA822}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "persistence", "persistence", "{0BB6C521-8EF3-4F26-BA35-E4E704DC3D54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBMS.Application", "src\core\SBMS.Application\SBMS.Application.csproj", "{95A855E9-6A90-EE30-B2E8-14C5C964C086}"

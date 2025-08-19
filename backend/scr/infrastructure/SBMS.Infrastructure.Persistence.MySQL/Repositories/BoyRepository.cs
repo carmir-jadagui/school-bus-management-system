@@ -35,6 +35,41 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
             }
         }
 
+        public async Task<BoyModel> GetBoyByDNI(int dni)
+        {
+            try
+            {
+                var query = from b in _dbContext.Boys
+                            where b.Dni == dni
+                            select new BoyModel
+                            {
+                                Id = b.Id,
+                                Dni = b.Dni,
+                                FirstName = b.FirstName,
+                                LastName = b.LastName,
+                                Gender = b.Gender,
+                                Age = b.Age
+                            };
+
+                var result = await query.FirstOrDefaultAsync();
+
+                if (result == null)
+                {
+                    throw new SBMSPersistenceException("No se encontró el DNI");
+                }
+
+                return result;
+            }
+            catch (SBMSPersistenceException ex)
+            {
+                throw new SBMSPersistenceException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoyByDNI");
+            }
+        }
+
         public async Task<ResponseBaseModel> AddBoy(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();

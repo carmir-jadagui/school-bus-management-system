@@ -15,7 +15,7 @@
         }
 
         /// <summary>
-        /// Api para consultar los chicos.
+        /// Api para consultar los chicos(as).
         /// Retorna un objeto ResultModel con los registros de la tabla Boys.
         /// </summary>
         /// <returns></returns>
@@ -28,8 +28,21 @@
         }
 
         /// <summary>
-        /// Api para agregar un modelo de tipo chico.
-        /// Retorna un objeto ResultModel con los registros de la tabla Boys.
+        /// Api para buscar un chico(a) por su DNI.
+        /// Retorna un objeto ResultModel con los datos del chico(a) solicitado.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetBoyByDNI")]
+        public async Task<IActionResult> GetBoyByDNI(int dni)
+        {
+            var result = await _boyServices.GetBoyByDNI(dni);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Api para agregar un modelo de tipo chico(a).
+        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) agregado.
         /// </summary>
         /// <returns></returns>
         [HttpPost("AddBoy")]

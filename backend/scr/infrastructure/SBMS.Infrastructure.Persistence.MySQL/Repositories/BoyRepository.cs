@@ -24,12 +24,14 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
                                 FirstName = b.FirstName,
                                 LastName = b.LastName,
                                 Gender = b.Gender,
-                                Age = b.Age
+                                Age = b.Age,
+                                CreatedAt = b.CreatedAt,
+                                UpdatedAt = b.UpdatedAt
                             };
 
                 return await query.ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new SBMSPersistenceException("Persistence Layer Failure: GetBoysAll");
             }
@@ -48,19 +50,14 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
                                 FirstName = b.FirstName,
                                 LastName = b.LastName,
                                 Gender = b.Gender,
-                                Age = b.Age
+                                Age = b.Age,
+                                CreatedAt = b.CreatedAt,
+                                UpdatedAt = b.UpdatedAt
                             };
 
-                var result = await query.FirstOrDefaultAsync();
-
-                if (result == null)
-                {
-                    throw new SBMSPersistenceException("No se encontró el DNI");
+                return await query.FirstOrDefaultAsync();
                 }
-
-                return result;
-            }
-            catch (SBMSPersistenceException ex)
+            catch (Exception)
             {
                 throw new SBMSPersistenceException(ex.Message);
             }
@@ -83,8 +80,8 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
                     LastName = boyModel.LastName,
                     Gender = boyModel.Gender,
                     Age = boyModel.Age,
-                    CreatedAt = boyModel.CreatedAt,
-                    UpdatedAt = boyModel.UpdatedAt
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
                 };
 
                 _dbContext.Boys.Add(boy);
@@ -94,7 +91,7 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
 
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy");
             }

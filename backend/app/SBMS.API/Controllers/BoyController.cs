@@ -37,6 +37,8 @@
         {
             var result = await _boyServices.GetBoyByDNI(dni);
 
+            if (result.Data == null) return NotFound();
+
             return Ok(result);
         }
 

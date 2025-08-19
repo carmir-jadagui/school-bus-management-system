@@ -1,4 +1,5 @@
-﻿using SBMS.Application.Services;
+﻿using SBMS.API.Validators;
+using SBMS.Application.Services;
 using SBMS.Domain.Repositories;
 using SBMS.Infrastructure.Persistence.MySQL.Repositories;
 using Serilog;
@@ -30,6 +31,7 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ITestServices, TestServices>();
+            services.AddScoped<IBoyServices, BoyServices>();
 
             return services;
         }
@@ -37,6 +39,14 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IBoyRepository, BoyRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterApplicationValidators(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<BoyModelValidator>();
 
             return services;
         }

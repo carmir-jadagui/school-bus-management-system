@@ -3,10 +3,12 @@
 CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Dni` INT NOT NULL,
-  `Apellidos` VARCHAR(45) NOT NULL,
-  `Nombres` VARCHAR(45) NOT NULL,
-  `Sexo` CHAR(1) NOT NULL,
-  `Edad` INT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Gender` CHAR(1) NOT NULL,
+  `Age` INT NOT NULL,
+  `CreatedAt` DATETIME NOT NULL,
+  `UpdatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`Id`, `Dni`),
   UNIQUE INDEX `Dni_UNIQUE` (`Dni` ASC) VISIBLE
   );
@@ -14,18 +16,22 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   -- Tabla de micros
   CREATE TABLE IF NOT EXISTS `sbms`.`buses` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Patente` VARCHAR(7) NOT NULL,
-  PRIMARY KEY (`Id`, `Patente`),
-  UNIQUE INDEX `Patente_UNIQUE` (`Patente` ASC) VISIBLE
+  `Plate` VARCHAR(7) NOT NULL,
+  `CreatedAt` DATETIME NOT NULL,
+  `UpdatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`, `Plate`),
+  UNIQUE INDEX `Patente_UNIQUE` (`Plate` ASC) VISIBLE
   );
 
   -- Tabla de choferes
   CREATE TABLE IF NOT EXISTS `sbms`.`drivers` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Dni` INT NOT NULL,
-  `Apellidos` VARCHAR(45) NOT NULL,
-  `Nombres` VARCHAR(45) NOT NULL,
-  `Telefono` INT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Telephone` INT NULL,
+  `CreatedAt` DATETIME NOT NULL,
+  `UpdatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`Id`, `Dni`),
   UNIQUE INDEX `Dni_UNIQUE` (`Dni` ASC) VISIBLE
   );

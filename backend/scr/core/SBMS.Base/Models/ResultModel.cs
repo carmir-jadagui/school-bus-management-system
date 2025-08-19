@@ -22,11 +22,6 @@
             Errors.Add(new ErrorModel { Message = message, ErrorCode = errorCode });
         }
 
-        public void AddInputDataError(string message) // Usar para las validaciones de los datos
-        {
-            AddError(message, ErrorModel.ErrorTypeEnum.InputDataError);
-        }
-
         public void AddDataBaseError(string message) // Usar para los errores de la capa de persistencia
         {
             AddError(message, ErrorModel.ErrorTypeEnum.DatabaseError);

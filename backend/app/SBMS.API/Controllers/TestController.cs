@@ -29,7 +29,7 @@
 
         /// <summary>
         /// Api para probar la conexión con la BD.
-        /// Retorna un objeto ResulModel con los registros de la tabla Test.
+        /// Retorna un objeto ResultModel con los registros de la tabla Test.
         /// </summary>
         /// <returns></returns>
         [HttpGet("TestBD")]

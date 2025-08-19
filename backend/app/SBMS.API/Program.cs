@@ -13,12 +13,17 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<CustomValidationFilter>();
 });
 
-// Add Registers: services, repositories, dataBase
+// Para activar las validaciones personalizadas
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+
+// Add Registers: services, repositories, dataBase, Validators
 builder.Services.LoggerConfigurations();
 builder.Services.RegistrerDataBase();
 builder.Services.RegisterAutoMapper();
 builder.Services.RegisterApplicationServices();
 builder.Services.RegisterRepositories();
+builder.Services.RegisterApplicationValidators();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

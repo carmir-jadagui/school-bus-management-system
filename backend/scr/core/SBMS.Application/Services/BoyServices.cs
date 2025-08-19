@@ -62,16 +62,8 @@
 
             try
             {
-                if (boyModel == null)
-                    throw new SBMSInputDataErrorException("BoyModel es requerido");
-
                 result.Data = await _boyRepository.CreateBoy(boyModel);
                 result.Message = "Chico(a) agregado(a) con éxito";
-            }
-            catch (SBMSInputDataErrorException ex)
-            {
-                result.AddInputDataError(ex.Message);
-                _logger.LogError(ex, ex.Message);
             }
             catch (SBMSPersistenceException ex)
             {
@@ -93,16 +85,8 @@
 
             try
             {
-                if (boyModel == null)
-                    throw new SBMSInputDataErrorException("BoyModel es requerido");
-
                 result.Data = await _boyRepository.UpdateBoy(boyModel);
                 result.Message = "Chico(a) modificado(a) con éxito";
-            }
-            catch (SBMSInputDataErrorException ex)
-            {
-                result.AddInputDataError(ex.Message);
-                _logger.LogError(ex, ex.Message);
             }
             catch (SBMSPersistenceException ex)
             {

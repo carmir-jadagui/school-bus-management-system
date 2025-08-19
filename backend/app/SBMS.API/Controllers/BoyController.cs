@@ -54,5 +54,20 @@
 
             return Ok(result);
         }
+
+        /// <summary>
+        /// Api para modificar el modelo del chico(a).
+        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) agregado.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> UpdateBoy([FromBody] BoyModel boyModel)
+        {
+            var result = await _boyServices.UpdateBoy(boyModel);
+
+            if (result.Data != null && result.Data.Id == 0) return NotFound();
+
+            return Ok(result);
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using SBMS.Base.Models;
-
-namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
+﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
 {
     public class BoyRepository : IBoyRepository
     {
@@ -56,12 +54,8 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
                             };
 
                 return await query.FirstOrDefaultAsync();
-                }
-            catch (Exception)
-            {
-                throw new SBMSPersistenceException(ex.Message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new SBMSPersistenceException("Persistence Layer Failure: GetBoyByDNI");
             }
@@ -94,6 +88,35 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
             catch (Exception)
             {
                 throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy");
+            }
+        }
+
+        public async Task<ResponseBaseModel> UpdateBoy(BoyModel boyModel)
+        {
+            var result = new ResponseBaseModel();
+
+            try
+            {
+                var boy = await _dbContext.Boys.FirstOrDefaultAsync(x => x.Id == boyModel.Id);
+
+                if (boy != null)
+                {
+                    boy.FirstName = boyModel.FirstName;
+                    boy.LastName = boyModel.LastName;
+                    boy.Gender = boyModel.Gender;
+                    boy.Age = boyModel.Age;
+                    boy.UpdatedAt = DateTime.Now;
+
+                    await _dbContext.SaveChangesAsync();
+
+                    result.Id = boy.Id;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBoy");
             }
         }
     }

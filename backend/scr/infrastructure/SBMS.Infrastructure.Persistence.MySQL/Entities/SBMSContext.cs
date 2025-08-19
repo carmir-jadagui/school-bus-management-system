@@ -13,6 +13,8 @@ public partial class SBMSContext : DbContext
 
     public virtual DbSet<Boy> Boys { get; set; }
 
+    public virtual DbSet<Bus> Buses { get; set; }
+
     public virtual DbSet<Test> Tests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,6 +40,23 @@ public partial class SBMSContext : DbContext
                 .HasMaxLength(1)
                 .IsFixedLength();
             entity.Property(e => e.LastName).HasMaxLength(45);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Bus>(entity =>
+        {
+            entity.HasKey(e => new { e.Id, e.Plate })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("buses");
+
+            entity.HasIndex(e => e.Plate, "Patente_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Plate).HasMaxLength(7);
+            entity.Property(e => e.Brand).HasMaxLength(45);
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
         });
 

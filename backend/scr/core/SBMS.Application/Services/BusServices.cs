@@ -62,6 +62,13 @@
 
             try
             {
+                // Para validar que la patente no esté siendo usado por otro micro
+                var busPlateExist = await _busRepository.GetBusByPlate(busModel.Plate);
+                if (busPlateExist != null)
+                {
+                    throw new InvalidOperationException("A bus with this Plate already exists");
+                }
+
                 result.Data = await _busRepository.CreateBus(busModel);
                 result.Message = "Bus added successfully";
             }

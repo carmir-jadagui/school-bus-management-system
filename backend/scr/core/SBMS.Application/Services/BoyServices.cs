@@ -62,6 +62,13 @@
 
             try
             {
+                // Para validar que el DNI no esté siendo usado por otro(a) chico(a)
+                var boyDNIExist = await _boyRepository.GetBoyByDNI(boyModel.Dni);
+                if (boyDNIExist != null)
+                {
+                    throw new InvalidOperationException("A boy with this DNI already exists");
+                }
+
                 result.Data = await _boyRepository.CreateBoy(boyModel);
                 result.Message = "Boy added successfully";
             }

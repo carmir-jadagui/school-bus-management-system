@@ -1,4 +1,6 @@
-﻿namespace SBMS.Application.Services
+﻿using SBMS.Domain.Models;
+
+namespace SBMS.Application.Services
 {
     public class DriverServices : IDriverServices
     {
@@ -62,6 +64,13 @@
 
             try
             {
+                // Para validar que el DNI no esté siendo usado por chofer
+                var driverDNIExist = await _driverRepository.GetDriverByDNI(driverModel.Dni);
+                if (driverDNIExist != null)
+                {
+                    throw new InvalidOperationException("A driver with this DNI already exists");
+                }
+
                 result.Data = await _driverRepository.CreateDriver(driverModel);
                 result.Message = "Driver added successfully";
             }

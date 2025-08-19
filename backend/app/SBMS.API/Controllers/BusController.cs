@@ -57,7 +57,7 @@
 
         /// <summary>
         /// Api para modificar el modelo del micro.
-        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del micro agregado.
+        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del micro modificado.
         /// </summary>
         /// <returns></returns>
         [HttpPut]

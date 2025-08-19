@@ -1,4 +1,4 @@
-﻿namespace SBMS.Infrastructure.Persistence.MySQL.Entities;
+﻿namespace SBMS.Persistence.MySQL.Entities;
 
 public partial class Bus
 {

@@ -1,4 +1,4 @@
-﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
+﻿namespace SBMS.Persistence.MySQL.Repositories
 {
     public class BusRepository : IBusRepository
     {

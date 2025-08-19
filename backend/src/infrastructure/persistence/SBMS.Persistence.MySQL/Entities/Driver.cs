@@ -1,6 +1,6 @@
-﻿namespace SBMS.Infrastructure.Persistence.MySQL.Entities;
+﻿namespace SBMS.Persistence.MySQL.Entities;
 
-public partial class Boy
+public partial class Driver
 {
     public int Id { get; set; }
 
@@ -10,9 +10,7 @@ public partial class Boy
 
     public string LastName { get; set; } = null!;
 
-    public string Gender { get; set; } = null!;
-
-    public int Age { get; set; }
+    public string? Telephone { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

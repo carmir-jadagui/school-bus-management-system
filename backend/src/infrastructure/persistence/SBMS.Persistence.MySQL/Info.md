@@ -1,7 +1,7 @@
 Para actualizar la estructura de la BD se debe:
 
 - Ir a Tools -> NuGet Package Manager -> Package Console
-- Seleccionar el proyecto de la capa de persistencia: SBMS.Infrastructure.Persistence.MySql
+- Seleccionar el proyecto de la capa de persistencia: SBMS.Persistence.MySql
 - Ejecutar la siguiente instrucción:
   Scaffold-DbContext "Server=[SERVER];Database=[DB];User=[USER];Password=[PASSWORD];TreatTinyAsBoolean=true;" "Pomelo.EntityFrameworkCore.MySql" -OutputDir ./Entities -ContextDir ./Entities -Context SBMSContext -Force
 

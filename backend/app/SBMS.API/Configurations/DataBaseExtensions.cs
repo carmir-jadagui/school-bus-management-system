@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
-using SBMS.Infrastructure.Persistence.MySQL.Entities;
+using SBMS.Persistence.MySQL.Entities;
 
 namespace SBMS.API.Configurations
 {

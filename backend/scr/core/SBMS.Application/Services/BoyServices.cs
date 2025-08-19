@@ -3,10 +3,10 @@
     public class BoyServices : IBoyServices
     {
         private readonly ILogger<BoyServices> _logger;
-        private readonly IBoyRepository _boyRepository;
+        private readonly IPersonBaseRepository<BoyModel> _boyRepository;
 
         public BoyServices(ILogger<BoyServices> logger,
-            IBoyRepository boyRepository)
+            IPersonBaseRepository<BoyModel> boyRepository)
         {
             _logger = logger;
             _boyRepository = boyRepository;
@@ -18,7 +18,7 @@
 
             try
             {
-                result.Data = await _boyRepository.GetBoysAll();
+                result.Data = await _boyRepository.GetPersonAll();
             }
             catch (SBMSPersistenceException ex)
             {
@@ -40,7 +40,7 @@
 
             try
             {
-                result.Data = await _boyRepository.GetBoyByDNI(dni);
+                result.Data = await _boyRepository.GetPersonByDNI(dni);
             }
             catch (SBMSPersistenceException ex)
             {
@@ -62,7 +62,14 @@
 
             try
             {
-                result.Data = await _boyRepository.CreateBoy(boyModel);
+                // Para validar que el DNI no esté siendo usado por otro(a) chico(a)
+                var boyDNIExist = await _boyRepository.GetPersonByDNI(boyModel.Dni);
+                if (boyDNIExist != null)
+                {
+                    throw new InvalidOperationException("A boy with this DNI already exists");
+                }
+
+                result.Data = await _boyRepository.CreatePerson(boyModel);
                 result.Message = "Boy added successfully";
             }
             catch (SBMSPersistenceException ex)
@@ -85,7 +92,7 @@
 
             try
             {
-                result.Data = await _boyRepository.UpdateBoy(boyModel);
+                result.Data = await _boyRepository.UpdatePerson(boyModel);
                 result.Message = "Boy updated successfully";
             }
             catch (SBMSPersistenceException ex)
@@ -108,7 +115,7 @@
 
             try
             {
-                result.Data = await _boyRepository.DeleteBoy(id);
+                result.Data = await _boyRepository.DeletePerson(id);
                 result.Message = "Boy deleted successfully";
             }
             catch (SBMSPersistenceException ex)

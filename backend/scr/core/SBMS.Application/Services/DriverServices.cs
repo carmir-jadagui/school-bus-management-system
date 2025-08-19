@@ -3,10 +3,10 @@
     public class DriverServices : IDriverServices
     {
         private readonly ILogger<DriverServices> _logger;
-        private readonly IDriverRepository _driverRepository;
+        private readonly IPersonBaseRepository<DriverModel> _driverRepository;
 
         public DriverServices(ILogger<DriverServices> logger,
-            IDriverRepository driverRepository)
+            IPersonBaseRepository<DriverModel> driverRepository)
         {
             _logger = logger;
             _driverRepository = driverRepository;
@@ -18,7 +18,7 @@
 
             try
             {
-                result.Data = await _driverRepository.GetDriversAll();
+                result.Data = await _driverRepository.GetPersonAll();
             }
             catch (SBMSPersistenceException ex)
             {
@@ -40,7 +40,7 @@
 
             try
             {
-                result.Data = await _driverRepository.GetDriverByDNI(dni);
+                result.Data = await _driverRepository.GetPersonByDNI(dni);
             }
             catch (SBMSPersistenceException ex)
             {
@@ -62,7 +62,14 @@
 
             try
             {
-                result.Data = await _driverRepository.CreateDriver(driverModel);
+                // Para validar que el DNI no esté siendo usado por chofer
+                var driverDNIExist = await _driverRepository.GetPersonByDNI(driverModel.Dni);
+                if (driverDNIExist != null)
+                {
+                    throw new InvalidOperationException("A driver with this DNI already exists");
+                }
+
+                result.Data = await _driverRepository.CreatePerson(driverModel);
                 result.Message = "Driver added successfully";
             }
             catch (SBMSPersistenceException ex)
@@ -85,7 +92,7 @@
 
             try
             {
-                result.Data = await _driverRepository.UpdateDriver(driverModel);
+                result.Data = await _driverRepository.UpdatePerson(driverModel);
                 result.Message = "Driver updated successfully";
             }
             catch (SBMSPersistenceException ex)
@@ -108,7 +115,7 @@
 
             try
             {
-                result.Data = await _driverRepository.DeleteDriver(id);
+                result.Data = await _driverRepository.DeletePerson(id);
                 result.Message = "Driver deleted successfully";
             }
             catch (SBMSPersistenceException ex)

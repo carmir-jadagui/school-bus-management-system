@@ -1,9 +1,7 @@
 ﻿namespace SBMS.Domain.Models;
 
-public class BusModel
+public class BusModel : AuditModel
 {
-    public int Id { get; set; }
-
     private string _plate = null!;
     public string Plate
     {
@@ -11,8 +9,4 @@ public class BusModel
         set => _plate = value.ToUpper(); // siempre se guarda en mayúsculas
     }
     public string? Brand { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
 }

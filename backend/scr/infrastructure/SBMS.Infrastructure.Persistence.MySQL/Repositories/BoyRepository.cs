@@ -1,6 +1,6 @@
 ﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
 {
-    public class BoyRepository : IBoyRepository
+    public class BoyRepository : IPersonBaseRepository<BoyModel>
     {
         private readonly SBMSContext _dbContext;
 
@@ -9,7 +9,7 @@
             _dbContext = dbContext;
         }
 
-        public async Task<IList<BoyModel>> GetBoysAll()
+        public async Task<IList<BoyModel>> GetPersonAll()
         {
             try
             {
@@ -35,7 +35,7 @@
             }
         }
 
-        public async Task<BoyModel> GetBoyByDNI(int dni)
+        public async Task<BoyModel> GetPersonByDNI(int dni)
         {
             try
             {
@@ -61,7 +61,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> CreateBoy(BoyModel boyModel)
+        public async Task<ResponseBaseModel> CreatePerson(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();
 
@@ -91,7 +91,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> UpdateBoy(BoyModel boyModel)
+        public async Task<ResponseBaseModel> UpdatePerson(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();
 
@@ -120,7 +120,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> DeleteBoy(int id)
+        public async Task<ResponseBaseModel> DeletePerson(int id)
         {
             var result = new ResponseBaseModel();
 

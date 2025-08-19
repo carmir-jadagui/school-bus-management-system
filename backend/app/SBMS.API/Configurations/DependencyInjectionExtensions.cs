@@ -32,6 +32,7 @@ namespace SBMS.API.Configurations
         {
             services.AddScoped<ITestServices, TestServices>();
             services.AddScoped<IBoyServices, BoyServices>();
+            services.AddScoped<IBusServices, BusServices>();
             services.AddScoped<IDriverServices, DriverServices>();
 
             return services;
@@ -41,6 +42,7 @@ namespace SBMS.API.Configurations
         {
             services.AddScoped<ITestRepository, TestRepository>();
             services.AddScoped<IBoyRepository, BoyRepository>();
+            services.AddScoped<IBusRepository, BusRepository>();
             services.AddScoped<IDriverRepository, DriverRepository>();
 
             return services;
@@ -49,6 +51,7 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterApplicationValidators(this IServiceCollection services)
         {
             services.AddValidatorsFromAssemblyContaining<BoyModelValidator>();
+            services.AddValidatorsFromAssemblyContaining<BusModelValidator>();
             services.AddValidatorsFromAssemblyContaining<DriverModelValidator>();
 
             return services;

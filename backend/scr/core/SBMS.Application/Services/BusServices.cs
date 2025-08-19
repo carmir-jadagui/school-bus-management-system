@@ -1,24 +1,24 @@
 ﻿namespace SBMS.Application.Services
 {
-    public class BoyServices : IBoyServices
+    public class BusServices : IBusServices
     {
-        private readonly ILogger<BoyServices> _logger;
-        private readonly IBoyRepository _boyRepository;
+        private readonly ILogger<BusServices> _logger;
+        private readonly IBusRepository _busRepository;
 
-        public BoyServices(ILogger<BoyServices> logger,
-            IBoyRepository boyRepository)
+        public BusServices(ILogger<BusServices> logger,
+            IBusRepository busRepository)
         {
             _logger = logger;
-            _boyRepository = boyRepository;
+            _busRepository = busRepository;
         }
 
-        public async Task<ResultModel<IList<BoyModel>>> GetBoysAll()
+        public async Task<ResultModel<IList<BusModel>>> GetBusesAll()
         {
-            var result = new ResultModel<IList<BoyModel>>();
+            var result = new ResultModel<IList<BusModel>>();
 
             try
             {
-                result.Data = await _boyRepository.GetBoysAll();
+                result.Data = await _busRepository.GetBusesAll();
             }
             catch (SBMSPersistenceException ex)
             {
@@ -34,13 +34,13 @@
             return result;
         }
 
-        public async Task<ResultModel<BoyModel>> GetBoyByDNI(int dni)
+        public async Task<ResultModel<BusModel>> GetBusByPlate(string plate)
         {
-            var result = new ResultModel<BoyModel>();
+            var result = new ResultModel<BusModel>();
 
             try
             {
-                result.Data = await _boyRepository.GetBoyByDNI(dni);
+                result.Data = await _busRepository.GetBusByPlate(plate);
             }
             catch (SBMSPersistenceException ex)
             {
@@ -56,14 +56,14 @@
             return result;
         }
 
-        public async Task<ResultModel<ResponseBaseModel>> CreateBoy(BoyModel boyModel)
+        public async Task<ResultModel<ResponseBaseModel>> CreateBus(BusModel busModel)
         {
             var result = new ResultModel<ResponseBaseModel>();
 
             try
             {
-                result.Data = await _boyRepository.CreateBoy(boyModel);
-                result.Message = "Boy added successfully";
+                result.Data = await _busRepository.CreateBus(busModel);
+                result.Message = "Bus added successfully";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -79,14 +79,14 @@
             return result;
         }
 
-        public async Task<ResultModel<ResponseBaseModel>> UpdateBoy(BoyModel boyModel)
+        public async Task<ResultModel<ResponseBaseModel>> UpdateBus(BusModel busModel)
         {
             var result = new ResultModel<ResponseBaseModel>();
 
             try
             {
-                result.Data = await _boyRepository.UpdateBoy(boyModel);
-                result.Message = "Boy updated successfully";
+                result.Data = await _busRepository.UpdateBus(busModel);
+                result.Message = "Bus updated successfully";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -102,14 +102,14 @@
             return result;
         }
 
-        public async Task<ResultModel<ResponseBaseModel>> DeleteBoy(int id)
+        public async Task<ResultModel<ResponseBaseModel>> DeleteBus(int id)
         {
             var result = new ResultModel<ResponseBaseModel>();
 
             try
             {
-                result.Data = await _boyRepository.DeleteBoy(id);
-                result.Message = "Boy deleted successfully";
+                result.Data = await _busRepository.DeleteBus(id);
+                result.Message = "Micro deleted successfully";
             }
             catch (SBMSPersistenceException ex)
             {

@@ -19,7 +19,7 @@
         /// Retorna un objeto ResultModel con los registros de la tabla Boys.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetBoysAll")]
+        [HttpGet]
         public async Task<IActionResult> GetBoysAll()
         {
             var result = await _boyServices.GetBoysAll();
@@ -32,7 +32,7 @@
         /// Retorna un objeto ResultModel con los datos del chico(a) solicitado.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetBoyByDNI")]
+        [HttpGet("{dni}")]
         public async Task<IActionResult> GetBoyByDNI(int dni)
         {
             var result = await _boyServices.GetBoyByDNI(dni);
@@ -45,10 +45,10 @@
         /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) agregado.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("AddBoy")]
-        public async Task<IActionResult> AddBoy([FromBody] BoyModel boyModel)
+        [HttpPost]
+        public async Task<IActionResult> CreateBoy([FromBody] BoyModel boyModel)
         {
-            var result = await _boyServices.AddBoy(boyModel);
+            var result = await _boyServices.CreateBoy(boyModel);
 
             return Ok(result);
         }

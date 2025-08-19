@@ -70,7 +70,7 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
             }
         }
 
-        public async Task<ResponseBaseModel> AddBoy(BoyModel boyModel)
+        public async Task<ResponseBaseModel> CreateBoy(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();
 
@@ -96,7 +96,7 @@ namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
             }
             catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: AddBoy");
+                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy");
             }
         }
     }

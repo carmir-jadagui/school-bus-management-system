@@ -56,7 +56,7 @@
             return result;
         }
 
-        public async Task<ResultModel<ResponseBaseModel>> AddBoy(BoyModel boyModel)
+        public async Task<ResultModel<ResponseBaseModel>> CreateBoy(BoyModel boyModel)
         {
             var result = new ResultModel<ResponseBaseModel>();
 
@@ -65,7 +65,7 @@
                 if (boyModel == null)
                     throw new SBMSInputDataErrorException("BoyModel es requerido");
 
-                result.Data = await _boyRepository.AddBoy(boyModel);
+                result.Data = await _boyRepository.CreateBoy(boyModel);
                 result.Message = "Chico(a) agregado con éxito";
             }
             catch (SBMSInputDataErrorException ex)

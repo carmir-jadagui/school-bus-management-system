@@ -4,6 +4,6 @@
     {
         Task<IList<BoyModel>> GetBoysAll();
         Task<BoyModel> GetBoyByDNI(int dni);
-        Task<ResponseBaseModel> AddBoy(BoyModel boyModel);
+        Task<ResponseBaseModel> CreateBoy(BoyModel boyModel);
     }
 }

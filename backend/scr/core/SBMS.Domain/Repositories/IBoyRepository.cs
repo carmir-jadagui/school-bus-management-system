@@ -6,5 +6,6 @@
         Task<BoyModel> GetBoyByDNI(int dni);
         Task<ResponseBaseModel> CreateBoy(BoyModel boyModel);
         Task<ResponseBaseModel> UpdateBoy(BoyModel boyModel);
+        Task<ResponseBaseModel> DeleteBoy(int id);
     }
 }

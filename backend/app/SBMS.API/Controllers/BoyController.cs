@@ -69,5 +69,20 @@
 
             return Ok(result);
         }
+
+        /// <summary>
+        /// Api para eliminar al(a la) chico(a).
+        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) eliminado.
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBoy(int id)
+        {
+            var result = await _boyServices.DeleteBoy(id);
+
+            if (result.Data != null && result.Data.Id == 0) return NotFound();
+
+            return Ok(result);
+        }
     }
 }

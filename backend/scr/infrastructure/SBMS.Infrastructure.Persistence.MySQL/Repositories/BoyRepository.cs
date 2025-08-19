@@ -119,5 +119,29 @@
                 throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBoy");
             }
         }
+
+        public async Task<ResponseBaseModel> DeleteBoy(int id)
+        {
+            var result = new ResponseBaseModel();
+
+            try
+            {
+                var boy = await _dbContext.Boys.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (boy != null)
+                {
+                    _dbContext.Boys.Remove(boy);
+                    await _dbContext.SaveChangesAsync();
+
+                    result.Id = id;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBoy");
+            }
+        }
     }
 }

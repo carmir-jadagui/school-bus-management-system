@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\scr\core\SBMS.Application\SBMS.Application.csproj" />
-    <ProjectReference Include="..\..\scr\infrastructure\SBMS.Infrastructure.Persistence.MySQL\SBMS.Infrastructure.Persistence.MySQL.csproj" />
+    <ProjectReference Include="..\..\src\core\SBMS.Application\SBMS.Application.csproj" />
+    <ProjectReference Include="..\..\src\infrastructure\persistence\SBMS.Persistence.MySQL\SBMS.Persistence.MySQL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
+﻿namespace SBMS.Persistence.MySQL.Repositories
 {
     public class TestRepository : ITestRepository
     {
@@ -23,7 +23,7 @@
 
                 return await query.ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new SBMSPersistenceException("Persistence Layer Failure: GetTestAll");
             }

@@ -1,7 +1,7 @@
 ﻿using SBMS.API.Validators;
 using SBMS.Application.Services;
 using SBMS.Domain.Repositories;
-using SBMS.Infrastructure.Persistence.MySQL.Repositories;
+using SBMS.Persistence.MySQL.Repositories;
 using Serilog;
 using System.Reflection;
 
@@ -23,7 +23,7 @@ namespace SBMS.API.Configurations
 
         public static IServiceCollection RegisterAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.Load("SBMS.Infrastructure.Persistence.MySQL"));
+            services.AddAutoMapper(Assembly.Load("SBMS.Persistence.MySQL"));
 
             return services;
         }

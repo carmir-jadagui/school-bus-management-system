@@ -1,27 +1,28 @@
-﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
+﻿namespace SBMS.Persistence.MySQL.Repositories
 {
-    public class DriverRepository : IPersonBaseRepository<DriverModel>
+    public class BoyRepository : IPersonBaseRepository<BoyModel>
     {
         private readonly SBMSContext _dbContext;
 
-        public DriverRepository(SBMSContext dbContext)
+        public BoyRepository(SBMSContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<IList<DriverModel>> GetPersonAll()
+        public async Task<IList<BoyModel>> GetPersonAll()
         {
             try
             {
-                var query = from b in _dbContext.Drivers
+                var query = from b in _dbContext.Boys
                             orderby b.Id
-                            select new DriverModel
+                            select new BoyModel
                             {
                                 Id = b.Id,
                                 Dni = b.Dni,
                                 FirstName = b.FirstName,
                                 LastName = b.LastName,
-                                Telephone = b.Telephone,
+                                Gender = b.Gender,
+                                Age = b.Age,
                                 CreatedAt = b.CreatedAt,
                                 UpdatedAt = b.UpdatedAt
                             };
@@ -30,23 +31,24 @@
             }
             catch (Exception)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriversAll");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoysAll");
             }
         }
 
-        public async Task<DriverModel> GetPersonByDNI(int dni)
+        public async Task<BoyModel> GetPersonByDNI(int dni)
         {
             try
             {
-                var query = from b in _dbContext.Drivers
+                var query = from b in _dbContext.Boys
                             where b.Dni == dni
-                            select new DriverModel
+                            select new BoyModel
                             {
                                 Id = b.Id,
                                 Dni = b.Dni,
                                 FirstName = b.FirstName,
                                 LastName = b.LastName,
-                                Telephone = b.Telephone,
+                                Gender = b.Gender,
+                                Age = b.Age,
                                 CreatedAt = b.CreatedAt,
                                 UpdatedAt = b.UpdatedAt
                             };
@@ -55,64 +57,66 @@
             }
             catch (Exception)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriverByDNI");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoyByDNI");
             }
         }
 
-        public async Task<ResponseBaseModel> CreatePerson(DriverModel driverModel)
+        public async Task<ResponseBaseModel> CreatePerson(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();
 
             try
             {
-                var driver = new Driver()
+                var boy = new Boy()
                 {
-                    Dni = driverModel.Dni,
-                    FirstName = driverModel.FirstName,
-                    LastName = driverModel.LastName,
-                    Telephone = driverModel.Telephone,
+                    Dni = boyModel.Dni,
+                    FirstName = boyModel.FirstName,
+                    LastName = boyModel.LastName,
+                    Gender = boyModel.Gender,
+                    Age = boyModel.Age,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
 
-                _dbContext.Drivers.Add(driver);
+                _dbContext.Boys.Add(boy);
                 await _dbContext.SaveChangesAsync();
 
-                result.Id = driver.Id;
+                result.Id = boy.Id;
 
                 return result;
             }
             catch (Exception)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: CreateDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy");
             }
         }
 
-        public async Task<ResponseBaseModel> UpdatePerson(DriverModel driverModel)
+        public async Task<ResponseBaseModel> UpdatePerson(BoyModel boyModel)
         {
             var result = new ResponseBaseModel();
 
             try
             {
-                var driver = await _dbContext.Drivers.FirstOrDefaultAsync(x => x.Id == driverModel.Id);
+                var boy = await _dbContext.Boys.FirstOrDefaultAsync(x => x.Id == boyModel.Id);
 
-                if (driver != null)
+                if (boy != null)
                 {
-                    driver.FirstName = driverModel.FirstName;
-                    driver.LastName = driverModel.LastName;
-                    driver.Telephone = driverModel.Telephone;
-                    driver.UpdatedAt = DateTime.Now;
+                    boy.FirstName = boyModel.FirstName;
+                    boy.LastName = boyModel.LastName;
+                    boy.Gender = boyModel.Gender;
+                    boy.Age = boyModel.Age;
+                    boy.UpdatedAt = DateTime.Now;
 
                     await _dbContext.SaveChangesAsync();
 
-                    result.Id = driver.Id;
+                    result.Id = boy.Id;
                 }
 
                 return result;
             }
             catch (Exception)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBoy");
             }
         }
 
@@ -122,11 +126,11 @@
 
             try
             {
-                var driver = await _dbContext.Drivers.FirstOrDefaultAsync(x => x.Id == id);
+                var boy = await _dbContext.Boys.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (driver != null)
+                if (boy != null)
                 {
-                    _dbContext.Drivers.Remove(driver);
+                    _dbContext.Boys.Remove(boy);
                     await _dbContext.SaveChangesAsync();
 
                     result.Id = id;
@@ -136,7 +140,7 @@
             }
             catch (Exception)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBoy");
             }
         }
     }

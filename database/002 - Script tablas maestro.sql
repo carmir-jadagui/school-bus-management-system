@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Dni` INT NOT NULL,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
-  `Telephone` INT NULL,
+  `Telephone` VARCHAR(20) NULL,
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`Id`, `Dni`),

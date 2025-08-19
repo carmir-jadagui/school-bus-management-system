@@ -57,7 +57,7 @@
 
         /// <summary>
         /// Api para modificar el modelo del chico(a).
-        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) agregado.
+        /// Retorna un objeto ResultModel<ResponseBaseModel> con el id del chico(a) modificado.
         /// </summary>
         /// <returns></returns>
         [HttpPut]

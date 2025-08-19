@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   CREATE TABLE IF NOT EXISTS `sbms`.`buses` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Plate` VARCHAR(7) NOT NULL,
+  `Brand` VARCHAR(45),
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`Id`, `Plate`),

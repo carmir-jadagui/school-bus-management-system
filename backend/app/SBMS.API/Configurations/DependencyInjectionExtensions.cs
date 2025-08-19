@@ -41,9 +41,9 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<ITestRepository, TestRepository>();
-            services.AddScoped<IBoyRepository, BoyRepository>();
+            services.AddScoped<IPersonBaseRepository<BoyModel>, BoyRepository>();
             services.AddScoped<IBusRepository, BusRepository>();
-            services.AddScoped<IDriverRepository, DriverRepository>();
+            services.AddScoped<IPersonBaseRepository<DriverModel>, DriverRepository>();
 
             return services;
         }

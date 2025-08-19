@@ -1,6 +1,6 @@
 ﻿namespace SBMS.Infrastructure.Persistence.MySQL.Repositories
 {
-    public class DriverRepository : IDriverRepository
+    public class DriverRepository : IPersonBaseRepository<DriverModel>
     {
         private readonly SBMSContext _dbContext;
 
@@ -9,7 +9,7 @@
             _dbContext = dbContext;
         }
 
-        public async Task<IList<DriverModel>> GetDriversAll()
+        public async Task<IList<DriverModel>> GetPersonAll()
         {
             try
             {
@@ -34,7 +34,7 @@
             }
         }
 
-        public async Task<DriverModel> GetDriverByDNI(int dni)
+        public async Task<DriverModel> GetPersonByDNI(int dni)
         {
             try
             {
@@ -59,7 +59,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> CreateDriver(DriverModel driverModel)
+        public async Task<ResponseBaseModel> CreatePerson(DriverModel driverModel)
         {
             var result = new ResponseBaseModel();
 
@@ -88,7 +88,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> UpdateDriver(DriverModel driverModel)
+        public async Task<ResponseBaseModel> UpdatePerson(DriverModel driverModel)
         {
             var result = new ResponseBaseModel();
 
@@ -116,7 +116,7 @@
             }
         }
 
-        public async Task<ResponseBaseModel> DeleteDriver(int id)
+        public async Task<ResponseBaseModel> DeletePerson(int id)
         {
             var result = new ResponseBaseModel();
 

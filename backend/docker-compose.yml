@@ -9,10 +9,10 @@ services:
         BUILD_CONFIGURATION: Release
     container_name: sbms_api_container
     environment:
-      ConnectionString__Server: ${DB_SERVER}
-      ConnectionString__DataBase: ${DB_NAME}
-      ConnectionString__User: ${DB_USER}
-      ConnectionString__Password: ${DB_PASSWORD}
+      ConnectionString__Server: ${SERVER}
+      ConnectionString__DataBase: ${DATABASE}
+      ConnectionString__User: ${USER}
+      ConnectionString__Password: ${PASSWORD}
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
     ports:
       - "3000:8080"

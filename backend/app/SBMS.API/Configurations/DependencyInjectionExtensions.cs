@@ -30,6 +30,7 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<ITestServices, TestServices>();
+            services.AddScoped<IBoyServices, BoyServices>();
 
             return services;
         }
@@ -37,6 +38,7 @@ namespace SBMS.API.Configurations
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             services.AddScoped<ITestRepository, TestRepository>();
+            services.AddScoped<IBoyRepository, BoyRepository>();
 
             return services;
         }

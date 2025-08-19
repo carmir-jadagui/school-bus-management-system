@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace SBMS.Infrastructure.Persistence.MySQL.Entities;
+﻿namespace SBMS.Infrastructure.Persistence.MySQL.Entities;
 
 public partial class SBMSContext : DbContext
 {
@@ -13,6 +11,8 @@ public partial class SBMSContext : DbContext
     {
     }
 
+    public virtual DbSet<Boy> Boys { get; set; }
+
     public virtual DbSet<Test> Tests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,6 +20,26 @@ public partial class SBMSContext : DbContext
         modelBuilder
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
+
+        modelBuilder.Entity<Boy>(entity =>
+        {
+            entity.HasKey(e => new { e.Id, e.Dni })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("boys");
+
+            entity.HasIndex(e => e.Dni, "Dni_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            entity.Property(e => e.FirstName).HasMaxLength(45);
+            entity.Property(e => e.Gender)
+                .HasMaxLength(1)
+                .IsFixedLength();
+            entity.Property(e => e.LastName).HasMaxLength(45);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+        });
 
         modelBuilder.Entity<Test>(entity =>
         {

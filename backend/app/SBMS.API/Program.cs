@@ -1,11 +1,17 @@
 using SBMS.API.Configurations;
+using SBMS.API.Validators;
 
 // Vars
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddCors();
-builder.Services.AddControllers();
+
+// Para validar los tipos de datos del modelo recibido 
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<CustomValidationFilter>();
+});
 
 // Add Registers: services, repositories, dataBase
 builder.Services.LoggerConfigurations();

@@ -1,33 +1,40 @@
-.app-header {
-  background-color: #1e1e1e;
-  padding: 1rem 2rem;
+/* Toolbar negro y letras blancas */
+.custom-toolbar {
+  background-color: #000000;
   color: white;
-}
-
-.nav-container {
   display: flex;
-  justify-content: flex-start;
+  gap: 1rem;
 }
 
-.nav-list {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-item a {
-  text-decoration: none;
+/* Botones normales */
+button.mat-button {
   color: white;
   font-weight: 500;
-  transition: color 0.3s;
 }
 
-.nav-item a:hover {
-  color: #4caf50; /* cambio de color al pasar el mouse */
+/* Hover */
+button.mat-button:hover {
+  background-color: #333333;
 }
 
-.active-link {
-  border-bottom: 2px solid #4caf50; /* subrayado de la página activa */
+/* Item activo */
+button.mat-button.active-link {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Dropdown menu */
+.custom-menu {
+  background-color: #000000;
+  color: white;
+}
+
+/* Items dentro de dropdown */
+.custom-menu .mat-menu-item {
+  color: white;
+}
+
+/* Hover de los items dentro del dropdown */
+.custom-menu .mat-menu-item:hover {
+  background-color: #333333;
 }

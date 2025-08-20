@@ -1,12 +1,30 @@
-<header class="app-header">
-  <nav class="nav-container">
-    <ul class="nav-list">
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/Test" routerLinkActive="active-link">Test</a>
-      </li>
-    </ul>
-  </nav>
-</header>
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/">Home</button>
+
+  <button mat-button [matMenuTriggerFor]="chicosMenu">Chicos</button>
+  <mat-menu #chicosMenu="matMenu">
+    <button mat-menu-item routerLink="/chicos/crud">CRUD Chicos</button>
+    <button mat-menu-item routerLink="/chicos/consulta">Consulta Chicos</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="microsMenu">Micros</button>
+  <mat-menu #microsMenu="matMenu">
+    <button mat-menu-item routerLink="/micros/crud">CRUD Micros</button>
+    <button mat-menu-item routerLink="/micros/consulta">Consulta Micros</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="choferesMenu">Choferes</button>
+  <mat-menu #choferesMenu="matMenu">
+    <button mat-menu-item routerLink="/choferes/crud">CRUD Choferes</button>
+    <button mat-menu-item routerLink="/choferes/consulta">Consulta Choferes</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="asociacionesMenu">Asociaciones</button>
+  <mat-menu #asociacionesMenu="matMenu">
+    <button mat-menu-item routerLink="/asociaciones/chofer-micro">Chofer a Micro</button>
+    <button mat-menu-item routerLink="/asociaciones/chicos-micro">Chicos a Micro</button>
+    <button mat-menu-item routerLink="/asociaciones/consultas">Consultas</button>
+  </mat-menu>
+
+  <button mat-button routerLink="/test">Test</button>
+</mat-toolbar>

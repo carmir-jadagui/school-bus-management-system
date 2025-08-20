@@ -5,7 +5,14 @@ using SBMS.API.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddCors();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:4200") // tu Angular
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
 
 // Para validar los tipos de datos del modelo recibido 
 builder.Services.AddControllers(options =>
@@ -30,6 +37,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

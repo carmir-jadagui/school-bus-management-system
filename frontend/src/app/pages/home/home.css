@@ -1,0 +1,21 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1e1e1e;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

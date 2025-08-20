@@ -1,5 +1,4 @@
-# school-bus-management-system
-Sistema de Gestión de Micros Escolares, Alumnos y Choferes 
+# Sistema de Gestión de Micros Escolares, Alumnos y Choferes
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
 

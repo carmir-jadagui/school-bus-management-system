@@ -1,0 +1,34 @@
+<div class="consulta-container">
+  <h2>Consulta de Micros</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Buscar</mat-label>
+    <input matInput [(ngModel)]="filterValue" (input)="applyFilter()" placeholder="Ingrese texto">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Patente Column -->
+    <ng-container matColumnDef="plate">
+      <th mat-header-cell *matHeaderCellDef>Patente</th>
+      <td mat-cell *matCellDef="let element">{{ element.plate }}</td>
+    </ng-container>
+
+    <!-- Marca Column -->
+    <ng-container matColumnDef="brand">
+      <th mat-header-cell *matHeaderCellDef>Marca</th>
+      <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
+    </ng-container>
+
+    <!-- Header y Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</div>

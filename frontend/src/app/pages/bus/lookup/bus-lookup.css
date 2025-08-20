@@ -1,0 +1,18 @@
+.consulta-container {
+  padding: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}

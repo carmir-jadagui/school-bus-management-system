@@ -3,6 +3,7 @@ import { Home } from './pages/home/home';
 import { Test } from './pages/test/test';
 import { BoyLookup } from './pages/boy/lookup/boy-lookup';
 import { DriverLookup } from './pages/driver/lookup/driver-lookup';
+import { BusLookup } from './pages/bus/lookup/bus-lookup';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -16,11 +17,11 @@ export const routes: Routes = [
       { path: 'lookup', component: DriverLookup },
     ]
   },
-//   { path: 'micros', children: [
-//       { path: 'crud', component: MicrosCrudComponent },
-//       { path: 'consulta', component: MicrosConsultaComponent },
-//     ]
-//   },
+  { path: 'bus', children: [
+      // { path: 'crud', component: MicrosCrudComponent },
+      { path: 'lookup', component: BusLookup },
+    ]
+  },
 //   { path: 'asociaciones', children: [
 //       { path: 'chofer-micro', component: ChoferMicroComponent },
 //       { path: 'chicos-micro', component: ChicosMicroComponent },

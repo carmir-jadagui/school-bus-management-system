@@ -1,6 +1,7 @@
-h4{
-    padding: 20px;
-    color: white;
-    background-color: blue;
-    text-align: center;
+.app-footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 0.9rem;
 }

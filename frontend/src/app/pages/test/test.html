@@ -1,11 +1,14 @@
-<h4>Comunicación con el BackEnd</h4>
-<h6>{{testBackEnd}}</h6>
-<h4>Comunicación con el BackEnd-BD</h4>
+<div class="test-container">
+  <h4>Comunicación con el BackEnd</h4>
+  <h6>{{ testBackEnd }}</h6>
 
-<h6>
+  <h4>Comunicación con el BackEnd-BD</h4>
+
     @for (item of testBD?.data; track item.id) {
         <ul>{{ item.id }}: {{ item.message }}</ul>
     } @empty {
         <li>There are no items.</li>
     }
-</h6>
+
+  <!-- <p *ngIf="error" class="error-text">{{ error }}</p> -->
+</div>

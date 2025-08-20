@@ -1,6 +1,12 @@
-<header>
-    <nav>
-        <a routerLink="/">Home</a>
-        <a routerLink="/Test">Test</a>
-    </nav>
+<header class="app-header">
+  <nav class="nav-container">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/Test" routerLinkActive="active-link">Test</a>
+      </li>
+    </ul>
+  </nav>
 </header>

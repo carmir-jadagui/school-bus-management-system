@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Test } from './pages/test/test';
 import { BoyLookup } from './pages/boy/lookup/boy-lookup';
+import { DriverLookup } from './pages/driver/lookup/driver-lookup';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -10,11 +11,11 @@ export const routes: Routes = [
       { path: 'lookup', component: BoyLookup },
     ]
   },
-//   { path: 'choferes', children: [
-//       { path: 'crud', component: ChoferesCrudComponent },
-//       { path: 'consulta', component: ChoferesConsultaComponent },
-//     ]
-//   },
+  { path: 'driver', children: [
+      // { path: 'crud', component: ChoferesCrudComponent },
+      { path: 'lookup', component: DriverLookup },
+    ]
+  },
 //   { path: 'micros', children: [
 //       { path: 'crud', component: MicrosCrudComponent },
 //       { path: 'consulta', component: MicrosConsultaComponent },

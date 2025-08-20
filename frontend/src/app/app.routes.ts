@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Test } from './pages/test/test';
+import { BoyLookup } from './pages/boy/lookup/boy-lookup';
 
 export const routes: Routes = [
   { path: '', component: Home },
-//   { path: 'chicos', children: [
-//       { path: 'crud', component: ChicosCrudComponent },
-//       { path: 'consulta', component: ChicosConsultaComponent },
-//     ]
-//   },
+  { path: 'boy', children: [
+      // { path: 'crud', component: ChicosCrudComponent },
+      { path: 'lookup', component: BoyLookup },
+    ]
+  },
 //   { path: 'choferes', children: [
 //       { path: 'crud', component: ChoferesCrudComponent },
 //       { path: 'consulta', component: ChoferesConsultaComponent },

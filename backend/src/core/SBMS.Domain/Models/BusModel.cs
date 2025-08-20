@@ -2,6 +2,7 @@
 
 public class BusModel : AuditModel
 {
+    public int Id { get; set; }
     private string _plate = null!;
     public string Plate
     {

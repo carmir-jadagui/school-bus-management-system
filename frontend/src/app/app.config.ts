@@ -1,8 +1,11 @@
+// Librerias de angular
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+// Otros
+import { routes } from './app.routes';
 import { ApiInterceptor } from './core/interceptos/api.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),                // usa fetch en lugar de XHR
       withInterceptorsFromDi()    // permite interceptores globales
     ),
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    provideAnimations()
   ]
 };

@@ -28,3 +28,8 @@ body {
   font-weight: bold;
   margin-top: 1rem;
 }
+
+.icon {
+  color: black;
+  font-size: 24px;
+}

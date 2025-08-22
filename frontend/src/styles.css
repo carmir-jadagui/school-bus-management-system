@@ -1,14 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-img{
+
+img {
     width: 100%;
 }
-body{
+
+body {
     font-family: Arial, Helvetica, sans-serif;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.error-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
+}

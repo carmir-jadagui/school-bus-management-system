@@ -10,9 +10,3 @@ mat-form-field {
 table {
   width: 100%;
 }
-
-.error-text {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-}

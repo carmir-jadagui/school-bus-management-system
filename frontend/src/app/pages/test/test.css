@@ -16,9 +16,3 @@ ul {
 li {
   margin-bottom: 0.5rem;
 }
-
-.error-text {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-}

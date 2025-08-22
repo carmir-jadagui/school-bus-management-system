@@ -116,7 +116,7 @@
             try
             {
                 result.Data = await _boyRepository.DeletePerson(id);
-                result.Message = "Boy deleted successfully";
+                result.Message = "Chico(a) eliminado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {

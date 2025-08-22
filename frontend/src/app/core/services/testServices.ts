@@ -1,13 +1,17 @@
+// Librerias de angular
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// Otros
 import { Observable } from 'rxjs';
-import { ResultModel } from '../models/resultModel';
 import { environment } from '../../../environments/environments';
+// Modelos
+import { ResultModel } from '../models/resultModel';
 import { TestModel } from '../models/testModel';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TestService {
   private baseUrl = environment.apiUrlBase + "test";
 

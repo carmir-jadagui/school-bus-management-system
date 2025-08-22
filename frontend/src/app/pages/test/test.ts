@@ -8,6 +8,7 @@ import { TestService } from '../../core/services/testServices';
 
 @Component({
   selector: 'app-test',
+  standalone: true,
   imports: [],
   templateUrl: './test.html',
   styleUrl: './test.css'

@@ -34,6 +34,28 @@
             return result;
         }
 
+        public async Task<ResultModel<BoyModel>> GetBoyById(int id)
+        {
+            var result = new ResultModel<BoyModel>();
+
+            try
+            {
+                result.Data = await _boyRepository.GetPersonById(id);
+            }
+            catch (SBMSPersistenceException ex)
+            {
+                result.AddDataBaseError(ex.Message);
+                _logger.LogError(ex, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                result.AddInternalError(ex.Message);
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return result;
+        }
+
         public async Task<ResultModel<BoyModel>> GetBoyByDNI(int dni)
         {
             var result = new ResultModel<BoyModel>();

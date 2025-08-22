@@ -28,14 +28,14 @@
         }
 
         /// <summary>
-        /// Api para buscar un chico(a) por su DNI.
+        /// Api para buscar un chico(a) por su ID.
         /// Retorna un objeto ResultModel con los datos del chico(a) solicitado.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{dni}")]
-        public async Task<IActionResult> GetBoyByDNI(int dni)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBoyById(int id)
         {
-            var result = await _boyServices.GetBoyByDNI(dni);
+            var result = await _boyServices.GetBoyById(id);
 
             if (result.Data == null) return NotFound();
 

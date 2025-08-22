@@ -3,6 +3,7 @@
     public interface IPersonBaseRepository<T> where T : PersonBaseModel
     {
         Task<IList<T>> GetPersonAll();
+        Task<T> GetPersonById(int id);
         Task<T> GetPersonByDNI(int dni);
         Task<ResponseBaseModel> CreatePerson(T personModel);
         Task<ResponseBaseModel> UpdatePerson(T personModel);

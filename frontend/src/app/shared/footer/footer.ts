@@ -1,3 +1,4 @@
+// Librerias de angular
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './footer.html',
   styleUrl: './footer.css'
 })
-export class Footer {
 
+export class Footer {
 }

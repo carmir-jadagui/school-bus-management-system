@@ -1,5 +1,7 @@
+// Librerias de angular
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+// Otros
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
 

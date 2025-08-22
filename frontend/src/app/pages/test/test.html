@@ -4,11 +4,13 @@
 
   <h4>Comunicación con el BackEnd-BD</h4>
 
-    @for (item of testBD?.data; track item.id) {
-        <ul>{{ item.id }}: {{ item.message }}</ul>
-    } @empty {
-        <li>There are no items.</li>
-    }
+  @for (item of testBD?.data; track item.id) {
+  <ul>{{ item.id }}: {{ item.message }}</ul>
+  } @empty {
+  <li>There are no items.</li>
+  }
 
-  <!-- <p *ngIf="error" class="error-text">{{ error }}</p> -->
+  @if (error){
+  <p class="error-text">{{ error }}</p>
+  }
 </div>

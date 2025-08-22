@@ -1,6 +1,9 @@
+// Librerias de angular
 import { Component, OnInit } from '@angular/core';
+// Modelos
 import { ResultModel } from '../../core/models/resultModel';
 import { TestModel } from '../../core/models/testModel';
+// Servicios
 import { TestService } from '../../core/services/testServices';
 
 @Component({
@@ -9,12 +12,13 @@ import { TestService } from '../../core/services/testServices';
   templateUrl: './test.html',
   styleUrl: './test.css'
 })
-export class Test implements OnInit{
+
+export class Test implements OnInit {
   testBackEnd: string | null = null;
   testBD: ResultModel<TestModel[]> | null = null;
   error: string | null = null;
 
-  constructor(private testService: TestService) {}
+  constructor(private testService: TestService) { }
 
   ngOnInit() {
     this.testService.getTestBackEnd().subscribe({

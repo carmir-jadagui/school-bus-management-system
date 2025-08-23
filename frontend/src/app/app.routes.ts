@@ -6,12 +6,14 @@ import { Test } from './pages/test/test';
 import { BoyLookup } from './pages/boy/lookup/boy-lookup';
 import { DriverLookup } from './pages/driver/lookup/driver-lookup';
 import { BusLookup } from './pages/bus/lookup/bus-lookup';
+import { BoyForm } from './pages/boy/boy-form/boy-form';
 
 export const routes: Routes = [
   { path: '', component: Home },
   {
     path: 'boy', children: [
-      // { path: 'crud', component: ChicosCrudComponent },
+      { path: 'form', component: BoyForm },
+      { path: 'form/:id', component: BoyForm },
       { path: 'lookup', component: BoyLookup },
     ]
   },

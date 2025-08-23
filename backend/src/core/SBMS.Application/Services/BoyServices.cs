@@ -88,11 +88,11 @@
                 var boyDNIExist = await _boyRepository.GetPersonByDNI(boyModel.Dni);
                 if (boyDNIExist != null)
                 {
-                    throw new InvalidOperationException("A boy with this DNI already exists");
+                    throw new InvalidOperationException("Ya existe un chico(a) con este DNI");
                 }
 
                 result.Data = await _boyRepository.CreatePerson(boyModel);
-                result.Message = "Boy added successfully";
+                result.Message = "Chico(a) creado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -115,7 +115,7 @@
             try
             {
                 result.Data = await _boyRepository.UpdatePerson(boyModel);
-                result.Message = "Boy updated successfully";
+                result.Message = "Chico(a) modificado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {

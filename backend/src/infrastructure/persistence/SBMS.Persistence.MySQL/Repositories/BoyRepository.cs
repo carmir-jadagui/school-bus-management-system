@@ -35,6 +35,32 @@
             }
         }
 
+        public async Task<BoyModel> GetPersonById(int id)
+        {
+            try
+            {
+                var query = from b in _dbContext.Boys
+                            where b.Id == id
+                            select new BoyModel
+                            {
+                                Id = b.Id,
+                                Dni = b.Dni,
+                                FirstName = b.FirstName,
+                                LastName = b.LastName,
+                                Gender = b.Gender,
+                                Age = b.Age,
+                                CreatedAt = b.CreatedAt,
+                                UpdatedAt = b.UpdatedAt
+                            };
+
+                return await query.FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById");
+            }
+        }
+
         public async Task<BoyModel> GetPersonByDNI(int dni)
         {
             try

@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 export const MATERIAL_IMPORTS = [
   MatIconModule,
@@ -15,7 +17,9 @@ export const MATERIAL_IMPORTS = [
   MatInputModule,
   MatCardModule,
   MatButtonModule,
-  MatDialogModule
+  MatDialogModule,
+  MatOptionModule,
+  MatSelectModule
 ];
 
 export const MATERIAL_PROVIDERS = [

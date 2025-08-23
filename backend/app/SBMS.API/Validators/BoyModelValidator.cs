@@ -20,7 +20,7 @@ namespace SBMS.API.Validators
                 .WithMessage("Age must be between 5 and 18 years.");
 
             RuleFor(x => x.Gender)
-                .Must(g => g == "F" || g == "M")
+                .Must(g => g == "F" || g == "M" || g == "O")
                 .WithMessage("Gender must be 'F' (Femenino) or 'M' (Masculino).");
         }
 

@@ -9,7 +9,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ResultModel } from '../../../core/models/resultModel';
 import { ResponseBaseModel } from '../../../core/models/ResponseBaseModel';
 import { BoyModel } from '../../../core/models/boyModel';
-
 // Servicios
 import { MATERIAL_IMPORTS, MATERIAL_PROVIDERS } from '../../../meterial/material.module';
 import { MessageService } from '../../../shared/services/message.service';
@@ -58,8 +57,8 @@ export class BoyLookup implements AfterViewInit {
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
 
-  getLinkModify() {
-
+  getLinkModify(): string {
+    return '/boy/form';
   }
 
   async getLinkDelete(id: number) {

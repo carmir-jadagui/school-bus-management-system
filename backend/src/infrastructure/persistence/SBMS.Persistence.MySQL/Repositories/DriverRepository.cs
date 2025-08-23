@@ -34,6 +34,31 @@
             }
         }
 
+        public async Task<DriverModel> GetPersonById(int id)
+        {
+            try
+            {
+                var query = from b in _dbContext.Drivers
+                            where b.Id == id
+                            select new DriverModel
+                            {
+                                Id = b.Id,
+                                Dni = b.Dni,
+                                FirstName = b.FirstName,
+                                LastName = b.LastName,
+                                Telephone = b.Telephone,
+                                CreatedAt = b.CreatedAt,
+                                UpdatedAt = b.UpdatedAt
+                            };
+
+                return await query.FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById");
+            }
+        }
+
         public async Task<DriverModel> GetPersonByDNI(int dni)
         {
             try

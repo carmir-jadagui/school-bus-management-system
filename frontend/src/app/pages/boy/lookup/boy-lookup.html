@@ -17,7 +17,7 @@
           }
         </mat-form-field>
 
-        <button mat-raised-button color="primary" routerLink="/agregar">
+        <button mat-raised-button color="primary" routerLink="/boy/form">
           <mat-icon>add</mat-icon> Agregar
         </button>
       </div>
@@ -81,10 +81,11 @@
       </div>
 
       <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-      @if (error){
-      <p class="error-text">{{ error }}</p>
-      }
     </mat-card-content>
+
+    @if (error)
+    {
+    <p class="error-text">{{ error }}</p>
+    }
   </mat-card>
 </div>

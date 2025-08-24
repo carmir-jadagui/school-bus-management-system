@@ -4,12 +4,18 @@
     {
         private readonly ILogger<BusServices> _logger;
         private readonly IBusRepository _busRepository;
+        private readonly IDriverServices _driverServices;
+        private readonly IBoyServices _boyServices;
 
         public BusServices(ILogger<BusServices> logger,
-            IBusRepository busRepository)
+            IBusRepository busRepository,
+            IDriverServices driverServices,
+            IBoyServices boyServices)
         {
             _logger = logger;
             _busRepository = busRepository;
+            _driverServices = driverServices;
+            _boyServices = boyServices;
         }
 
         public async Task<ResultModel<IList<BusModel>>> GetBusesAll()
@@ -72,6 +78,9 @@
                     throw new InvalidOperationException("Ya existe un micro con esta Patente");
                 }
 
+                // Para validar si existen el chofes y chicos asignados
+                await ValidateBusAssignments(busModel);
+
                 result.Data = await _busRepository.CreateBus(busModel);
                 result.Message = "Micro creado con éxito";
             }
@@ -103,6 +112,9 @@
                 // Para dale el formato correcto a la patente
                 busModel.Plate = NormalizePlate(busModel.Plate);
 
+                // Para validar si existen el chofes y chicos asignados
+                await ValidateBusAssignments(busModel);
+
                 result.Data = await _busRepository.UpdateBus(busModel);
                 result.Message = "Micro modificado con éxito";
             }
@@ -131,6 +143,16 @@
 
             try
             {
+                // Valida que no tenga asignaciones
+                var busExist = await _busRepository.GetBusById(id);
+                if (busExist != null)
+                {
+                    if (busExist.Driver != null || busExist.Boys.Count > 0)
+                    {
+                        throw new InvalidOperationException("No se puede eliminar este Micro, ya que tiene asignaciones");
+                    }
+                }
+                
                 result.Data = await _busRepository.DeleteBus(id);
                 result.Message = "Micro eliminado con éxito";
             }
@@ -168,6 +190,37 @@
 
                 _ => throw new SBMSInputDataException("El valor no cumple los formatos permitidos")
             };
+        }
+
+        // Para validar si existen el chofes y chicos asignados
+        private async Task ValidateBusAssignments(BusModel busModel)
+        {
+            // Para validar si tiene asignado chofer y si este existe
+            if (busModel.Driver != null)
+            {
+                var driverExist = await _driverServices.GetDriverById(busModel.Driver.Id);
+                if (driverExist.Data == null)
+                {
+                    throw new InvalidOperationException("El Chofer asignado no existe");
+                }
+            }
+
+            // Para validar si tiene asignado chico(a)(s) y si existen
+            if (busModel.Boys?.Count > 0)
+            {
+                var boys = await _boyServices.GetBoysAll();
+
+                // Deja boysIds con sólo los ids
+                var boysIds = boys.Data.Select(b => b.Id).ToHashSet();
+
+                // Verificar si todos los IDs del busModel están en existingIds
+                bool boysExist = busModel.Boys.All(bi => boysIds.Contains(bi.Id));
+
+                if (!boysExist)
+                {
+                    throw new InvalidOperationException("Algun(os)(as) Chico(a)(s) asignado(s) no existe(n)");
+                }
+            }
         }
     }
 }

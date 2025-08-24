@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 // Modelos
 import { ResultModel } from '../../../core/models/resultModel';
-import { ResponseBaseModel } from '../../../core/models/ResponseBaseModel';
+import { ResponseBaseModel } from '../../../core/models/responseBaseModel';
 import { BoyModel } from '../../../core/models/boyModel';
 // Servicios
 import { MATERIAL_IMPORTS, MATERIAL_PROVIDERS } from '../../../meterial/material.module';

@@ -12,7 +12,7 @@ import { HelpersService } from '../../../shared/services/helpers.service';
 // Modelos
 import { BoyModel } from '../../../core/models/boyModel';
 import { ResultModel } from '../../../core/models/resultModel';
-import { ResponseBaseModel } from '../../../core/models/ResponseBaseModel';
+import { ResponseBaseModel } from '../../../core/models/responseBaseModel';
 
 @Component({
   selector: 'app-boy-form',

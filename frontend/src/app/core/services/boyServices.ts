@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environments';
 // Modelos
 import { ResultModel } from '../models/resultModel';
-import { ResponseBaseModel } from '../models/ResponseBaseModel';
+import { ResponseBaseModel } from '../models/responseBaseModel';
 import { BoyModel } from '../models/boyModel';
 
 @Injectable({

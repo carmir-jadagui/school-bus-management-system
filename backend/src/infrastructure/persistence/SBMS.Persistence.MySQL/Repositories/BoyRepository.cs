@@ -29,9 +29,9 @@
 
                 return await query.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoysAll");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoysAll", ex.Message);
             }
         }
 
@@ -55,9 +55,9 @@
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById", ex.Message);
             }
         }
 
@@ -81,9 +81,9 @@
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoyByDNI");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBoyByDNI", ex.Message);
             }
         }
 
@@ -111,9 +111,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy");
+                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBoy", ex.Message);
             }
         }
 
@@ -140,9 +140,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBoy");
+                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBoy", ex.Message);
             }
         }
 
@@ -164,9 +164,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBoy");
+                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBoy", ex.Message);
             }
         }
     }

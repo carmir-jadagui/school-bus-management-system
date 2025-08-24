@@ -20,15 +20,28 @@
                                 Id = b.Id,
                                 Plate = b.Plate,
                                 Brand = b.Brand,
-                                CreatedAt = b.CreatedAt,
-                                UpdatedAt = b.UpdatedAt
+                                Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
+                                {
+                                    Id = b.BusesDriver.DriversId,
+                                    FirstName = b.BusesDriver.Drivers.FirstName,
+                                    LastName = b.BusesDriver.Drivers.LastName
+                                } : null,
+                                Boys = b.BusesBoys.Select(bb => new BoyModel
+                                {
+                                    Id = bb.BoysId,
+                                    Dni = bb.Boys.Dni,
+                                    FirstName = bb.Boys.FirstName,
+                                    LastName = bb.Boys.LastName,
+                                    Gender = bb.Boys.Gender,
+                                    Age = bb.Boys.Age,
+                                }).ToList()
                             };
 
                 return await query.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusesAll");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusesAll", ex.Message);
             }
         }
 
@@ -43,15 +56,28 @@
                                 Id = b.Id,
                                 Plate = b.Plate,
                                 Brand = b.Brand,
-                                CreatedAt = b.CreatedAt,
-                                UpdatedAt = b.UpdatedAt
+                                Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
+                                {
+                                    Id = b.BusesDriver.DriversId,
+                                    FirstName = b.BusesDriver.Drivers.FirstName,
+                                    LastName = b.BusesDriver.Drivers.LastName
+                                } : null,
+                                Boys = b.BusesBoys.Select(bb => new BoyModel
+                                {
+                                    Id = bb.BoysId,
+                                    Dni = bb.Boys.Dni,
+                                    FirstName = bb.Boys.FirstName,
+                                    LastName = bb.Boys.LastName,
+                                    Gender = bb.Boys.Gender,
+                                    Age = bb.Boys.Age,
+                                }).ToList()
                             };
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusById");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusById", ex.Message);
             }
         }
 
@@ -66,24 +92,41 @@
                                 Id = b.Id,
                                 Plate = b.Plate,
                                 Brand = b.Brand,
-                                CreatedAt = b.CreatedAt,
-                                UpdatedAt = b.UpdatedAt
+                                Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
+                                {
+                                    Id = b.BusesDriver.DriversId,
+                                    FirstName = b.BusesDriver.Drivers.FirstName,
+                                    LastName = b.BusesDriver.Drivers.LastName
+                                } : null,
+                                Boys = b.BusesBoys.Select(bb => new BoyModel
+                                {
+                                    Id = bb.BoysId,
+                                    Dni = bb.Boys.Dni,
+                                    FirstName = bb.Boys.FirstName,
+                                    LastName = bb.Boys.LastName,
+                                    Gender = bb.Boys.Gender,
+                                    Age = bb.Boys.Age,
+                                }).ToList()
                             };
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusByPlate");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusByPlate", ex.Message);
             }
         }
 
         public async Task<ResponseBaseModel> CreateBus(BusModel busModel)
         {
+            // se aplica Transaction / Rollback
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
             var result = new ResponseBaseModel();
 
             try
             {
+                // Para guardar los datos de micro
                 var bus = new Bus()
                 {
                     Plate = busModel.Plate,
@@ -97,11 +140,45 @@
 
                 result.Id = bus.Id;
 
+                // Para guardar la relación entre el micro y el chofer
+                if (busModel.Driver != null)
+                {
+                    var busDriver = new BusesDriver()
+                    {
+                        BusId = bus.Id,
+                        DriversId = busModel.Driver.Id
+                    };
+
+                    _dbContext.BusesDrivers.Add(busDriver);
+                };
+
+                // Para guardar la relación entre el micro y el(los) chico(a)(s)
+                if (busModel.Boys?.Count > 0)
+                {
+                    foreach (var boy in busModel.Boys)
+                    {
+                        var busBoy = new BusesBoy()
+                        {
+                            BusId = bus.Id,
+                            BoysId = boy.Id
+                        };
+
+                        _dbContext.BusesBoys.Add(busBoy);
+                    }
+                };
+
+                // Guardar las relaciones
+                await _dbContext.SaveChangesAsync();
+
+                // Commit de la transacción
+                await transaction.CommitAsync();
+
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBus");
+                await transaction.RollbackAsync();
+                throw new SBMSPersistenceException("Persistence Layer Failure: CreateBus", ex.Message);
             }
         }
 
@@ -125,9 +202,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBus");
+                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateBus", ex.Message);
             }
         }
 
@@ -149,9 +226,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBus");
+                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteBus", ex.Message);
             }
         }
     }

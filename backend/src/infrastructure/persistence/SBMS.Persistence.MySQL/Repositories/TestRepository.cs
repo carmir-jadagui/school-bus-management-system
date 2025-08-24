@@ -23,9 +23,9 @@
 
                 return await query.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetTestAll");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetTestAll", ex.Message);
             }
         }
     }

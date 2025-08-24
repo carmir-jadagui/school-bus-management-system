@@ -23,7 +23,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -166,7 +166,7 @@
                 7 => // Formato XX123XX
                     $"{cleaned.Substring(0, 2)} {cleaned.Substring(2, 3)} {cleaned.Substring(5, 2)}",
 
-                _ => throw new ArgumentException("El valor no cumple los formatos permitidos")
+                _ => throw new SBMSInputDataException("El valor no cumple los formatos permitidos")
             };
         }
     }

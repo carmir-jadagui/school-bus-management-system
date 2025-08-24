@@ -32,6 +32,29 @@
             }
         }
 
+        public async Task<BusModel> GetBusById(int id)
+        {
+            try
+            {
+                var query = from b in _dbContext.Buses
+                            where b.Id == id
+                            select new BusModel
+                            {
+                                Id = b.Id,
+                                Plate = b.Plate,
+                                Brand = b.Brand,
+                                CreatedAt = b.CreatedAt,
+                                UpdatedAt = b.UpdatedAt
+                            };
+
+                return await query.FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetBusById");
+            }
+        }
+
         public async Task<BusModel> GetBusByPlate(string plate)
         {
             try

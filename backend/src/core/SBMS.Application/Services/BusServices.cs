@@ -34,13 +34,13 @@
             return result;
         }
 
-        public async Task<ResultModel<BusModel>> GetBusByPlate(string plate)
+        public async Task<ResultModel<BusModel>> GetBusById(int id)
         {
             var result = new ResultModel<BusModel>();
 
             try
             {
-                result.Data = await _busRepository.GetBusByPlate(plate);
+                result.Data = await _busRepository.GetBusById(id);
             }
             catch (SBMSPersistenceException ex)
             {
@@ -66,11 +66,11 @@
                 var busPlateExist = await _busRepository.GetBusByPlate(busModel.Plate);
                 if (busPlateExist != null)
                 {
-                    throw new InvalidOperationException("A bus with this Plate already exists");
+                    throw new InvalidOperationException("Ya existe un micro con esta Patente");
                 }
 
                 result.Data = await _busRepository.CreateBus(busModel);
-                result.Message = "Bus added successfully";
+                result.Message = "Micro creado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -93,7 +93,7 @@
             try
             {
                 result.Data = await _busRepository.UpdateBus(busModel);
-                result.Message = "Bus updated successfully";
+                result.Message = "Micro modificado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -116,7 +116,7 @@
             try
             {
                 result.Data = await _busRepository.DeleteBus(id);
-                result.Message = "Micro deleted successfully";
+                result.Message = "Micro eliminado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {

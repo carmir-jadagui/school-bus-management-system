@@ -34,6 +34,28 @@
             return result;
         }
 
+        public async Task<ResultModel<DriverModel>> GetDriverById(int id)
+        {
+            var result = new ResultModel<DriverModel>();
+
+            try
+            {
+                result.Data = await _driverRepository.GetPersonById(id);
+            }
+            catch (SBMSPersistenceException ex)
+            {
+                result.AddDataBaseError(ex.Message);
+                _logger.LogError(ex, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                result.AddInternalError(ex.Message);
+                _logger.LogError(ex, ex.Message);
+            }
+
+            return result;
+        }
+
         public async Task<ResultModel<DriverModel>> GetDriverByDNI(int dni)
         {
             var result = new ResultModel<DriverModel>();
@@ -66,11 +88,11 @@
                 var driverDNIExist = await _driverRepository.GetPersonByDNI(driverModel.Dni);
                 if (driverDNIExist != null)
                 {
-                    throw new InvalidOperationException("A driver with this DNI already exists");
+                    throw new InvalidOperationException("Ya existe un chofer con este DNI");
                 }
 
                 result.Data = await _driverRepository.CreatePerson(driverModel);
-                result.Message = "Driver added successfully";
+                result.Message = "Chofer creado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -93,7 +115,7 @@
             try
             {
                 result.Data = await _driverRepository.UpdatePerson(driverModel);
-                result.Message = "Driver updated successfully";
+                result.Message = "Chofer modificado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -116,7 +138,7 @@
             try
             {
                 result.Data = await _driverRepository.DeletePerson(id);
-                result.Message = "Driver deleted successfully";
+                result.Message = "Chofer eliminado(a) con éxito";
             }
             catch (SBMSPersistenceException ex)
             {

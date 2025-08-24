@@ -3,7 +3,7 @@
     public interface IDriverServices
     {
         Task<ResultModel<IList<DriverModel>>> GetDriversAll();
-        Task<ResultModel<DriverModel>> GetDriverByDNI(int dni);
+        Task<ResultModel<DriverModel>> GetDriverById(int id);
         Task<ResultModel<ResponseBaseModel>> CreateDriver(DriverModel driverModel);
         Task<ResultModel<ResponseBaseModel>> UpdateDriver(DriverModel driverModel);
         Task<ResultModel<ResponseBaseModel>> DeleteDriver(int id);

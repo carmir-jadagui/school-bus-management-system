@@ -1,6 +1,6 @@
 -- Script para crear las tablas maestro
 -- Tabla chicos
-CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
+  CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Dni` INT NOT NULL,
   `FirstName` VARCHAR(45) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Age` INT NOT NULL,
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`Id`, `Dni`),
+  PRIMARY KEY (`Id`),
   UNIQUE INDEX `Dni_UNIQUE` (`Dni` ASC) VISIBLE
   );
 
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Brand` VARCHAR(45),
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`Id`, `Plate`),
+  PRIMARY KEY (`Id`),
   UNIQUE INDEX `Patente_UNIQUE` (`Plate` ASC) VISIBLE
   );
 
@@ -33,6 +33,6 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   `Telephone` VARCHAR(20) NULL,
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`Id`, `Dni`),
+  PRIMARY KEY (`Id`),
   UNIQUE INDEX `Dni_UNIQUE` (`Dni` ASC) VISIBLE
   );

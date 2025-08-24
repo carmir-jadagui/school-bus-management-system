@@ -27,6 +27,11 @@
             AddError(message, ErrorModel.ErrorTypeEnum.DatabaseError);
         }
 
+        public void AddInputDataError(string message) // Usar para los errores de validación / formato de datos
+        {
+            AddError(message, ErrorModel.ErrorTypeEnum.InputDataError);
+        }
+
         public void AddInternalError(string message) // Usar para los errores internos
         {
             AddError(message, ErrorModel.ErrorTypeEnum.InternalError);

@@ -56,7 +56,7 @@ public partial class SBMSContext : DbContext
             entity.HasIndex(e => e.Plate, "Patente_UNIQUE").IsUnique();
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Plate).HasMaxLength(7);
+            entity.Property(e => e.Plate).HasMaxLength(9);
             entity.Property(e => e.Brand).HasMaxLength(45);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");

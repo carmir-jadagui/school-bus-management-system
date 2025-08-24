@@ -45,7 +45,7 @@ export class BoyForm implements OnInit {
   ngOnInit(): void {
     this.boyForm = this.fb.group({
       id: [''],
-      dni: ['', Validators.required, Validators.pattern('^[0-9]*$')],
+      dni: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: ['', Validators.required],

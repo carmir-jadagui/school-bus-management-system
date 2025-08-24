@@ -10,12 +10,12 @@ import { MATERIAL_IMPORTS, MATERIAL_PROVIDERS } from '../../../meterial/material
   providers: [MATERIAL_PROVIDERS],
   templateUrl: './information-message.html',
 })
+
 export class InformationMessage implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<InformationMessage>) { }
 
   ngOnInit(): void {
-
   }
 
   close(): void {

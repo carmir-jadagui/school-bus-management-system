@@ -16,5 +16,5 @@ public partial class Driver
 
     public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Bus> Buses { get; set; } = new List<Bus>();
+    public virtual BusesDriver BusesDriver { get; set; }
 }

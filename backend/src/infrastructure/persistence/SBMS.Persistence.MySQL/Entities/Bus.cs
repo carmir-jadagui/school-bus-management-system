@@ -12,7 +12,7 @@ public partial class Bus
 
     public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Boy> Boys { get; set; } = new List<Boy>();
+    public virtual ICollection<BusesBoy> BusesBoys { get; set; } = new List<BusesBoy>();
 
-    public virtual ICollection<Driver> Drivers { get; set; } = new List<Driver>();
+    public virtual BusesDriver BusesDriver { get; set; }
 }

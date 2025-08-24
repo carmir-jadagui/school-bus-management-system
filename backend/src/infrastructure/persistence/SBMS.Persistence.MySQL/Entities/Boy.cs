@@ -18,5 +18,5 @@ public partial class Boy
 
     public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Bus> Buses { get; set; } = new List<Bus>();
+    public virtual BusesBoy BusesBoy { get; set; }
 }

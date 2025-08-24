@@ -28,14 +28,14 @@
         }
 
         /// <summary>
-        /// Api para buscar un chofer por su DNI.
+        /// Api para buscar un chofer por su ID.
         /// Retorna un objeto ResultModel con los datos del chofer solicitado.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{dni}")]
-        public async Task<IActionResult> GetDriverByDNI(int dni)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDriverById(int id)
         {
-            var result = await _driverServices.GetDriverByDNI(dni);
+            var result = await _driverServices.GetDriverById(id);
 
             if (result.Data == null) return NotFound();
 

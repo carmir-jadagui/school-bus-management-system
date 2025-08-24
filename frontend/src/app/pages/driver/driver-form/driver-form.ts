@@ -6,50 +6,44 @@ import { CommonModule } from '@angular/common';
 // Librerias de material
 import { MATERIAL_IMPORTS, MATERIAL_PROVIDERS } from '../../../meterial/material.module';
 // Servicios
-import { BoyService } from '../../../core/services/boyServices';
+import { DriverService } from '../../../core/services/driverServices';
 import { MessageService } from '../../../shared/services/message.service';
 import { HelpersService } from '../../../shared/services/helpers.service';
 // Modelos
-import { BoyModel } from '../../../core/models/boyModel';
+import { DriverModel } from '../../../core/models/driverModel';
 import { ResultModel } from '../../../core/models/resultModel';
 import { ResponseBaseModel } from '../../../core/models/responseBaseModel';
 
 @Component({
-  selector: 'app-boy-form',
+  selector: 'app-driver-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MATERIAL_IMPORTS],
   providers: [MATERIAL_PROVIDERS],
-  templateUrl: './boy-form.html',
+  templateUrl: './driver-form.html',
 })
 
-export class BoyForm implements OnInit {
+export class DriverForm implements OnInit {
   error: string | null = null;
-  boyForm!: FormGroup;
+  driverForm!: FormGroup;
   id?: number;
   isEditMode = false;
-  genderOptions = [
-    { value: 'M', viewValue: 'Masculino' },
-    { value: 'F', viewValue: 'Femenino' },
-    { value: 'O', viewValue: 'Otro' }
-  ];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private boyService: BoyService,
+    private driverService: DriverService,
     private messageService: MessageService,
     private helpersService: HelpersService
   ) { }
 
   ngOnInit(): void {
-    this.boyForm = this.fb.group({
+    this.driverForm = this.fb.group({
       id: [''],
       dni: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      gender: ['', Validators.required],
-      age: ['', [Validators.required, Validators.min(5), Validators.max(18)]]
+      telephone: ['', [Validators.pattern(/^\+?[0-9 ]*$/)]]
     });
 
     this.route.paramMap.subscribe(params => {
@@ -57,16 +51,16 @@ export class BoyForm implements OnInit {
       if (idParam) {
         this.id = +idParam;
         this.isEditMode = true;
-        this.loadBoy(this.id);
+        this.loadDriver(this.id);
       }
     });
   }
 
-  loadBoy(id: number) {
-    this.boyService.getBoyById(id).subscribe({
-      next: (res: ResultModel<BoyModel>) => {
+  loadDriver(id: number) {
+    this.driverService.getDriverById(id).subscribe({
+      next: (res: ResultModel<DriverModel>) => {
         if (res.ok) {
-          this.boyForm.patchValue(res.data);
+          this.driverForm.patchValue(res.data);
         } else {
           this.error = res.message || 'Error al cargar datos';
         }
@@ -79,15 +73,15 @@ export class BoyForm implements OnInit {
   }
 
   save() {
-    if (this.boyForm.invalid) {
-      this.boyForm.markAllAsTouched();
+    if (this.driverForm.invalid) {
+      this.driverForm.markAllAsTouched();
       return;
     }
 
-    const boy: BoyModel = this.boyForm.value;
+    const driver: DriverModel = this.driverForm.value;
 
     if (this.isEditMode && this.id) { //Para modificar
-      this.boyService.updateBoy(boy).subscribe({
+      this.driverService.updateDriver(driver).subscribe({
         next: (res: ResultModel<ResponseBaseModel>) => {
           if (res.ok) {
             this.messageService.showInformation(res.message.toString());
@@ -101,7 +95,7 @@ export class BoyForm implements OnInit {
         }
       });
     } else { //Para agregar
-      this.boyService.createBoy(boy).subscribe({
+      this.driverService.createDriver(driver).subscribe({
         next: (res: ResultModel<ResponseBaseModel>) => {
           if (res.ok) {
             let meesage = res.message.toString() + ', con el ID: ' + res.data.id.toString();
@@ -119,7 +113,32 @@ export class BoyForm implements OnInit {
   }
 
   // Permite solo números
-  onKeyPress(event: KeyboardEvent) {
+  onKeyPressDNI(event: KeyboardEvent) {
     this.helpersService.allowOnlyNumbers(event);
+  }
+
+  // Permite el signo de + sólo en el primer caracter, numeros y espacios
+  onKeyPressTlf(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    const char = event.key;
+
+    // Permitir teclas de control (borrar, flechas, tab, etc.)
+    if (event.ctrlKey || event.altKey || char.length > 1) {
+      return;
+    }
+
+    // Primera posición sólo se permite '+' o número
+    if (value.length === 0) {
+      if (!/[0-9+]/.test(char)) {
+        event.preventDefault();
+      }
+      return;
+    }
+
+    // A partir de la segunda posición sólo números o espacio
+    if (!/[0-9 ]/.test(char)) {
+      event.preventDefault();
+    }
   }
 }

@@ -11,6 +11,7 @@ import { MATERIAL_IMPORTS, MATERIAL_PROVIDERS } from '../../../meterial/material
   providers: [MATERIAL_PROVIDERS],
   templateUrl: './confirmation-message.html'
 })
+
 export class ConfirmationMessage implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ConfirmationMessage>) { }

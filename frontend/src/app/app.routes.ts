@@ -4,9 +4,10 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Test } from './pages/test/test';
 import { BoyLookup } from './pages/boy/lookup/boy-lookup';
-import { DriverLookup } from './pages/driver/lookup/driver-lookup';
-import { BusLookup } from './pages/bus/lookup/bus-lookup';
 import { BoyForm } from './pages/boy/boy-form/boy-form';
+import { DriverLookup } from './pages/driver/lookup/driver-lookup';
+import { DriverForm } from './pages/driver/driver-form/driver-form';
+import { BusLookup } from './pages/bus/lookup/bus-lookup';
 import { BusForm } from './pages/bus/bus-form/bus-form';
 
 export const routes: Routes = [
@@ -20,7 +21,8 @@ export const routes: Routes = [
   },
   {
     path: 'driver', children: [
-      // { path: 'crud', component: ChoferesCrudComponent },
+      { path: 'form', component: DriverForm },
+      { path: 'form/:id', component: DriverForm },
       { path: 'lookup', component: DriverLookup },
     ]
   },

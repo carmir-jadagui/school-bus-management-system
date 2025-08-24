@@ -92,7 +92,7 @@
                 }
 
                 result.Data = await _driverRepository.CreatePerson(driverModel);
-                result.Message = "Chofer creado(a) con éxito";
+                result.Message = "Chofer creado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -115,7 +115,7 @@
             try
             {
                 result.Data = await _driverRepository.UpdatePerson(driverModel);
-                result.Message = "Chofer modificado(a) con éxito";
+                result.Message = "Chofer modificado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
@@ -138,7 +138,7 @@
             try
             {
                 result.Data = await _driverRepository.DeletePerson(id);
-                result.Message = "Chofer eliminado(a) con éxito";
+                result.Message = "Chofer eliminado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {

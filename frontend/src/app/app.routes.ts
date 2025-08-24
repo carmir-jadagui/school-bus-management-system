@@ -8,6 +8,7 @@ import { BoyForm } from './pages/boy/boy-form/boy-form';
 import { DriverLookup } from './pages/driver/lookup/driver-lookup';
 import { DriverForm } from './pages/driver/driver-form/driver-form';
 import { BusLookup } from './pages/bus/lookup/bus-lookup';
+import { BusForm } from './pages/bus/bus-form/bus-form';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -27,7 +28,8 @@ export const routes: Routes = [
   },
   {
     path: 'bus', children: [
-      // { path: 'crud', component: MicrosCrudComponent },
+      { path: 'form', component: BusForm },
+      { path: 'form/:id', component: BusForm },
       { path: 'lookup', component: BusLookup },
     ]
   },

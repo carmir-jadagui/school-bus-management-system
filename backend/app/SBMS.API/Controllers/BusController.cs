@@ -28,14 +28,14 @@
         }
 
         /// <summary>
-        /// Api para buscar un micro por su Patente.
+        /// Api para buscar un micro por su id.
         /// Retorna un objeto ResultModel con los datos del micro solicitado.
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{plate}")]
-        public async Task<IActionResult> GetBusByPlate(string plate)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBusById(int id)
         {
-            var result = await _busServices.GetBusByPlate(plate);
+            var result = await _busServices.GetBusById(id);
 
             if (result.Data == null) return NotFound();
 

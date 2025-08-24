@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `sbms`.`boys` (
   -- Tabla de micros
   CREATE TABLE IF NOT EXISTS `sbms`.`buses` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Plate` VARCHAR(7) NOT NULL,
+  `Plate` VARCHAR(9) NOT NULL,
   `Brand` VARCHAR(45),
   `CreatedAt` DATETIME NOT NULL,
   `UpdatedAt` DATETIME NOT NULL,

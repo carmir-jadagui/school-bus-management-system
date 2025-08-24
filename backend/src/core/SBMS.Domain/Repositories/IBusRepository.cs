@@ -3,6 +3,7 @@
     public interface IBusRepository
     {
         Task<IList<BusModel>> GetBusesAll();
+        Task<BusModel> GetBusById(int id);
         Task<BusModel> GetBusByPlate(string plate);
         Task<ResponseBaseModel> CreateBus(BusModel busModel);
         Task<ResponseBaseModel> UpdateBus(BusModel busModel);

@@ -6,13 +6,15 @@ public partial class Driver
 
     public int Dni { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; }
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; }
 
-    public string? Telephone { get; set; }
+    public string Telephone { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
+
+    public virtual BusesDriver BusesDriver { get; set; }
 }

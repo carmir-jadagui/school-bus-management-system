@@ -4,12 +4,18 @@
     {
         private readonly ILogger<BusServices> _logger;
         private readonly IBusRepository _busRepository;
+        private readonly IDriverServices _driverServices;
+        private readonly IBoyServices _boyServices;
 
         public BusServices(ILogger<BusServices> logger,
-            IBusRepository busRepository)
+            IBusRepository busRepository,
+            IDriverServices driverServices,
+            IBoyServices boyServices)
         {
             _logger = logger;
             _busRepository = busRepository;
+            _driverServices = driverServices;
+            _boyServices = boyServices;
         }
 
         public async Task<ResultModel<IList<BusModel>>> GetBusesAll()
@@ -23,7 +29,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -45,7 +51,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -72,6 +78,9 @@
                     throw new InvalidOperationException("Ya existe un micro con esta Patente");
                 }
 
+                // Para validar si existen el chofes y chicos asignados
+                await ValidateBusAssignments(busModel);
+
                 result.Data = await _busRepository.CreateBus(busModel);
                 result.Message = "Micro creado con éxito";
             }
@@ -83,7 +92,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -103,6 +112,9 @@
                 // Para dale el formato correcto a la patente
                 busModel.Plate = NormalizePlate(busModel.Plate);
 
+                // Para validar si existen el chofes y chicos asignados
+                await ValidateBusAssignments(busModel);
+
                 result.Data = await _busRepository.UpdateBus(busModel);
                 result.Message = "Micro modificado con éxito";
             }
@@ -114,7 +126,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -131,13 +143,23 @@
 
             try
             {
+                // Valida que no tenga asignaciones
+                var busExist = await _busRepository.GetBusById(id);
+                if (busExist != null)
+                {
+                    if (busExist.Driver != null || busExist.Boys.Count > 0)
+                    {
+                        throw new InvalidOperationException("No se puede eliminar este Micro, ya que tiene asignaciones");
+                    }
+                }
+                
                 result.Data = await _busRepository.DeleteBus(id);
                 result.Message = "Micro eliminado con éxito";
             }
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {
@@ -166,8 +188,71 @@
                 7 => // Formato XX123XX
                     $"{cleaned.Substring(0, 2)} {cleaned.Substring(2, 3)} {cleaned.Substring(5, 2)}",
 
-                _ => throw new ArgumentException("El valor no cumple los formatos permitidos")
+                _ => throw new SBMSInputDataException("El valor no cumple los formatos permitidos")
             };
+        }
+
+        // Para validar si existen el chofes y chicos asignados
+        private async Task ValidateBusAssignments(BusModel busModel)
+        {
+            var assigned = await _busRepository.GetBusesAll();
+
+            // Para validar si tiene asignado chofer y si este existe
+            if (busModel.Driver != null)
+            {
+                var driverExist = await _driverServices.GetDriverById(busModel.Driver.Id);
+
+                if (driverExist.Data == null)
+                {
+                    throw new InvalidOperationException("El Chofer asignado no existe");
+                }
+                else // Si existe, se valida que no esté asignado a otro micro
+                {
+                    // Deja driversIds con sólo el campo driver.id, cuando este no sea nulo, y no provenga del micro a modificar
+                    var driversIds = assigned.Where(w => w.Id != busModel.Id).Select(s => s.Driver?.Id).ToHashSet();
+
+                    // Verificar si el ID de busModel.Driver no está asignado en driversIds
+                    bool driversIsAssigned = driversIds.Contains(busModel.Driver.Id);
+
+                    if (driversIsAssigned)
+                    {
+                        throw new InvalidOperationException("El Chofer está asignado a otro Micro");
+                    }
+                }
+            }
+
+            // Para validar si tiene asignado chico(a)(s) y si existen
+            if (busModel.Boys?.Count > 0)
+            {
+                var boys = await _boyServices.GetBoysAll();
+
+                // Deja boysIds con sólo el campo Id
+                var boysIds = boys.Data.Select(s => s.Id).ToHashSet();
+
+                // Verificar si todos los IDs del busModel están en existingIds
+                bool boysExist = busModel.Boys.All(bi => boysIds.Contains(bi.Id));
+
+                if (!boysExist)
+                {
+                    throw new InvalidOperationException("Algun(os)(as) Chico(a)(s) asignado(s) no existe(n)");
+                }
+                else // Si existe, se valida que no esté asignado(s) a otro micro
+                {
+                    // Filtra sólo el objeto de Boys con sólo los que tengan valor y que no provenga del micro a modificar
+                    var boysAssigned = assigned.Where(w => w.Id != busModel.Id && w.Boys != null).SelectMany(sm => sm.Boys).ToList();
+
+                    // Deja driversIds con sólo los ids
+                    var boysIdsInBus = boysAssigned.Select(s => s.Id).ToHashSet();
+
+                    // Verificar si el ID de busModel.Driver no está asignado en driversIds
+                    bool boysIsAssigned = busModel.Boys.All(bi => boysIdsInBus.Contains(bi.Id));
+
+                    if (boysIsAssigned)
+                    {
+                        throw new InvalidOperationException("Algun(os)(as) chico(a)(s) está(n) asignado(s) a otro Micro");
+                    }
+                }
+            }
         }
     }
 }

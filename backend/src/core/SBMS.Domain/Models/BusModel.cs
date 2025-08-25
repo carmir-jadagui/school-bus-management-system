@@ -9,5 +9,7 @@ public class BusModel : AuditModel
         get => _plate;
         set => _plate = value.ToUpper(); // siempre se guarda en mayúsculas
     }
-    public string? Brand { get; set; }
+    public string Brand { get; set; }
+    public DriverModel Driver { get; set; }
+    public IList<BoyModel> Boys { get; set; }
 }

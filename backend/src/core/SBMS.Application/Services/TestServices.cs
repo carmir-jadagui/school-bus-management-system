@@ -23,7 +23,7 @@
             catch (SBMSPersistenceException ex)
             {
                 result.AddDataBaseError(ex.Message);
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, ex.MessageLogger);
             }
             catch (Exception ex)
             {

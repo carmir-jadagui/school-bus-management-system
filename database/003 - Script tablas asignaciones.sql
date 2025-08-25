@@ -4,6 +4,7 @@
     `BusId` INT NOT NULL,
     `BoysId` INT NOT NULL,
     PRIMARY KEY (`BusId`, `BoysId`),
+    UNIQUE INDEX `BoysId_UNIQUE` (`BoysId` ASC) VISIBLE,
     CONSTRAINT `FK_Buses_Boys`
       FOREIGN KEY (`BusId`)
       REFERENCES `sbms`.`buses` (`Id`),
@@ -17,6 +18,8 @@
     `BusId` INT NOT NULL,
     `DriversId` INT NOT NULL,
     PRIMARY KEY (`BusId`, `DriversId`),
+    UNIQUE INDEX `BusId_UNIQUE` (`BusId` ASC) VISIBLE,
+    UNIQUE INDEX `DriversId_UNIQUE` (`DriversId` ASC) VISIBLE,
     CONSTRAINT `FK_Buses_Drivers`
       FOREIGN KEY (`BusId`)
       REFERENCES `sbms`.`buses` (`Id`),

@@ -28,9 +28,9 @@
 
                 return await query.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriversAll");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriversAll", ex.Message);
             }
         }
 
@@ -53,9 +53,9 @@
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetPersonById", ex.Message);
             }
         }
 
@@ -78,9 +78,9 @@
 
                 return await query.FirstOrDefaultAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriverByDNI");
+                throw new SBMSPersistenceException("Persistence Layer Failure: GetDriverByDNI", ex.Message);
             }
         }
 
@@ -107,9 +107,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: CreateDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: CreateDriver", ex.Message);
             }
         }
 
@@ -135,9 +135,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: UpdateDriver", ex.Message);
             }
         }
 
@@ -159,9 +159,9 @@
 
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteDriver");
+                throw new SBMSPersistenceException("Persistence Layer Failure: DeleteDriver", ex.Message);
             }
         }
     }

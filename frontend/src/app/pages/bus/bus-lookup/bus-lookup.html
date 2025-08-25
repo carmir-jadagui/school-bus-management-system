@@ -46,7 +46,13 @@
           <ng-container matColumnDef="driverData">
             <th mat-header-cell *matHeaderCellDef>Chofer</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.driver?.dni ?? '' }} - {{ element.driver?.firstName ?? '' }}, {{ element.driver?.lastName ?? '' }} 
+              {{ element.driver?.dni ?? '' }} 
+              @if(element.driver != null)
+              { - }
+              {{ element.driver?.firstName ?? '' }}
+              @if(element.driver != null)
+              {, }
+              {{ element.driver?.lastName ?? '' }} 
             </td>
           </ng-container>
 

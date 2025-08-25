@@ -23,6 +23,7 @@
                                 Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
                                 {
                                     Id = b.BusesDriver.DriversId,
+                                    Dni = b.BusesDriver.Drivers.Dni,
                                     FirstName = b.BusesDriver.Drivers.FirstName,
                                     LastName = b.BusesDriver.Drivers.LastName
                                 } : null,
@@ -59,6 +60,7 @@
                                 Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
                                 {
                                     Id = b.BusesDriver.DriversId,
+                                    Dni = b.BusesDriver.Drivers.Dni,
                                     FirstName = b.BusesDriver.Drivers.FirstName,
                                     LastName = b.BusesDriver.Drivers.LastName
                                 } : null,
@@ -91,22 +93,7 @@
                             {
                                 Id = b.Id,
                                 Plate = b.Plate,
-                                Brand = b.Brand,
-                                Driver = b.BusesDriver != null && b.BusesDriver.Drivers != null ? new DriverModel
-                                {
-                                    Id = b.BusesDriver.DriversId,
-                                    FirstName = b.BusesDriver.Drivers.FirstName,
-                                    LastName = b.BusesDriver.Drivers.LastName
-                                } : null,
-                                Boys = b.BusesBoys.Select(bb => new BoyModel
-                                {
-                                    Id = bb.BoysId,
-                                    Dni = bb.Boys.Dni,
-                                    FirstName = bb.Boys.FirstName,
-                                    LastName = bb.Boys.LastName,
-                                    Gender = bb.Boys.Gender,
-                                    Age = bb.Boys.Age,
-                                }).ToList()
+                                Brand = b.Brand
                             };
 
                 return await query.FirstOrDefaultAsync();

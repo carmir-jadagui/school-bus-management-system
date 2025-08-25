@@ -3,11 +3,11 @@ import { Routes } from '@angular/router';
 // Paginas
 import { Home } from './pages/home/home';
 import { Test } from './pages/test/test';
-import { BoyLookup } from './pages/boy/lookup/boy-lookup';
+import { BoyLookup } from './pages/boy/boy-lookup/boy-lookup';
 import { BoyForm } from './pages/boy/boy-form/boy-form';
-import { DriverLookup } from './pages/driver/lookup/driver-lookup';
+import { DriverLookup } from './pages/driver/driver-lookup/driver-lookup';
 import { DriverForm } from './pages/driver/driver-form/driver-form';
-import { BusLookup } from './pages/bus/lookup/bus-lookup';
+import { BusLookup } from './pages/bus/bus-lookup/bus-lookup';
 import { BusForm } from './pages/bus/bus-form/bus-form';
 
 export const routes: Routes = [
@@ -33,12 +33,6 @@ export const routes: Routes = [
       { path: 'lookup', component: BusLookup },
     ]
   },
-  //   { path: 'asociaciones', children: [
-  //       { path: 'chofer-micro', component: ChoferMicroComponent },
-  //       { path: 'chicos-micro', component: ChicosMicroComponent },
-  //       { path: 'consultas', component: AsociacionesConsultaComponent },
-  //     ]
-  //   },
   { path: 'test', component: Test },
   { path: '**', redirectTo: '' }
 ];

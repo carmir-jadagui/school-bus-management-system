@@ -24,7 +24,7 @@ import { BusService } from '../../../core/services/busServices';
 })
 
 export class BusLookup implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'plate', 'brand', 'acciones'];
+  displayedColumns: string[] = ['id', 'plate', 'brand', 'driverData', 'boysCount', 'acciones'];
   dataSource = new MatTableDataSource<BusModel>([]);
   filterValue = '';
   error: string | null = null;
@@ -55,6 +55,10 @@ export class BusLookup implements AfterViewInit {
 
   applyFilter(): void {
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
+  }
+
+  getLinkDetail(): string {
+    return '/bus/form';
   }
 
   getLinkModify(): string {

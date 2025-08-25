@@ -195,13 +195,29 @@
         // Para validar si existen el chofes y chicos asignados
         private async Task ValidateBusAssignments(BusModel busModel)
         {
+            var assigned = await _busRepository.GetBusesAll();
+
             // Para validar si tiene asignado chofer y si este existe
             if (busModel.Driver != null)
             {
                 var driverExist = await _driverServices.GetDriverById(busModel.Driver.Id);
+
                 if (driverExist.Data == null)
                 {
                     throw new InvalidOperationException("El Chofer asignado no existe");
+                }
+                else // Si existe, se valida que no esté asignado a otro micro
+                {
+                    // Deja driversIds con sólo el campo driver.id, cuando este no sea nulo, y no provenga del micro a modificar
+                    var driversIds = assigned.Where(w => w.Id != busModel.Id).Select(s => s.Driver?.Id).ToHashSet();
+
+                    // Verificar si el ID de busModel.Driver no está asignado en driversIds
+                    bool driversIsAssigned = driversIds.Contains(busModel.Driver.Id);
+
+                    if (driversIsAssigned)
+                    {
+                        throw new InvalidOperationException("El Chofer está asignado a otro Micro");
+                    }
                 }
             }
 
@@ -210,8 +226,8 @@
             {
                 var boys = await _boyServices.GetBoysAll();
 
-                // Deja boysIds con sólo los ids
-                var boysIds = boys.Data.Select(b => b.Id).ToHashSet();
+                // Deja boysIds con sólo el campo Id
+                var boysIds = boys.Data.Select(s => s.Id).ToHashSet();
 
                 // Verificar si todos los IDs del busModel están en existingIds
                 bool boysExist = busModel.Boys.All(bi => boysIds.Contains(bi.Id));
@@ -219,6 +235,22 @@
                 if (!boysExist)
                 {
                     throw new InvalidOperationException("Algun(os)(as) Chico(a)(s) asignado(s) no existe(n)");
+                }
+                else // Si existe, se valida que no esté asignado(s) a otro micro
+                {
+                    // Filtra sólo el objeto de Boys con sólo los que tengan valor y que no provenga del micro a modificar
+                    var boysAssigned = assigned.Where(w => w.Id != busModel.Id && w.Boys != null).SelectMany(sm => sm.Boys).ToList();
+
+                    // Deja driversIds con sólo los ids
+                    var boysIdsInBus = boysAssigned.Select(s => s.Id).ToHashSet();
+
+                    // Verificar si el ID de busModel.Driver no está asignado en driversIds
+                    bool boysIsAssigned = busModel.Boys.All(bi => boysIdsInBus.Contains(bi.Id));
+
+                    if (boysIsAssigned)
+                    {
+                        throw new InvalidOperationException("Algun(os)(as) chico(a)(s) está(n) asignado(s) a otro Micro");
+                    }
                 }
             }
         }
